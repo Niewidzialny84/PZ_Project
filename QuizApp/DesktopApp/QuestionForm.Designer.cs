@@ -36,6 +36,7 @@ namespace DesktopApp
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -61,7 +62,7 @@ namespace DesktopApp
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(344, 411);
+            this.button1.Location = new System.Drawing.Point(344, 402);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(88, 36);
             this.button1.TabIndex = 2;
@@ -108,11 +109,22 @@ namespace DesktopApp
             this.button5.Text = "Answer D";
             this.button5.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(642, 50);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(158, 26);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Time Left: 100 s";
+            // 
             // QuestionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -136,5 +148,6 @@ namespace DesktopApp
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label label3;
     }
 }

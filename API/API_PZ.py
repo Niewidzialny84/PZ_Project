@@ -1,17 +1,21 @@
 from flask import Flask, request, jsonify, make_response
-from flask_sqlalchemy import SQLAlchemy 
+from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_restful import Resource, Api
 from sqlalchemy.orm import validates, Session
 from marshmallow import fields, validate
-
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
+import json, random
+from flask_selfdoc import Autodoc
 
 app = Flask(__name__) 
 api = Api(app) 
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+mysqlconnector://root:admin@localhost/pzdatabase"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///pzDatabase.db' 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True 
 db = SQLAlchemy(app) 
 ma = Marshmallow(app)
+auto = Autodoc(app)
 
 ####### User ##############
 
@@ -19,17 +23,16 @@ class User(db.Model):
     user  = db.Table('user', 
     db.Column('id', db.Integer, primary_key=True),
     db.Column('username', db.String(64), unique=True),
-    db.Column('email', db.String(320)),
     db.Column('password', db.String(128)))
 
-    def __init__(self, username, email, password):
+    def __init__(self, username, password):
         self.username = username
-        self.email = email
         self.password = password
 
 class UserSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'username', 'email', 'password')
+        fields = ('id', 'username', 'password')
+        session = db.Session
 
 user_schema = UserSchema() 
 users_schema = UserSchema(many=True)
@@ -51,6 +54,7 @@ class Stats(db.Model):
 class StatsSchema(ma.Schema):
     class Meta:
         fields = ('id', 'userid', 'quizid', 'score')
+        session = db.Session
 
 stat_schema = StatsSchema() 
 stats_schema = StatsSchema(many=True)
@@ -60,59 +64,18 @@ stats_schema = StatsSchema(many=True)
 class Quiz(db.Model): 
     quiz  = db.Table('quiz',
     db.Column('id', db.Integer, primary_key=True), 
-    db.Column('name', db.String(200)),
-    db.Column('categoryid', db.Integer, db.ForeignKey('category.id')),
-    db.Column('difficultyid', db.Integer, db.ForeignKey('difficulty.id')),
-    db.Column('timeperquestion', db.Integer))
+    db.Column('category_name', db.String(200)))
 
-    def __init__(self, name, categoryid, difficultyid, timeperquestion):
-        self.name = name
-        self.categoryid = categoryid
-        self.difficultyid = difficultyid
-        self.timeperquestion = timeperquestion
+    questions = relationship("Questions", primaryjoin="and_(Quiz.id == Questions.quizid)", backref=db.backref("quiz", lazy="joined"))
 
+    def __init__(self, category_name):
+        self.category_name = category_name
 class QuizSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'name', 'categoryid', 'difficultyid', 'timeperquestion')
+        fields = ('id', 'category_name')
 
 quiz_schema = QuizSchema() 
 quizzes_schema = QuizSchema(many=True)
-
-####### Difficulty ##############
-
-class Difficulty(db.Model): 
-    difficulty  = db.Table('difficulty',
-    db.Column('id', db.Integer, primary_key=True), 
-    db.Column('name', db.String(50)),
-    db.Column('points', db.Integer))
-
-    def __init__(self, name, points):
-        self.name = name
-        self.points = points
-
-class DifficultySchema(ma.Schema):
-    class Meta:
-        fields = ('id', 'name', 'points')
-
-difficulty_schema = DifficultySchema() 
-difficulties_schema = DifficultySchema(many=True)
-
-####### Category ##############
-
-class Category(db.Model): 
-    category  = db.Table('category',
-    db.Column('id', db.Integer, primary_key=True), 
-    db.Column('name', db.String(32)))
-
-    def __init__(self, name):
-        self.name = name
-
-class CategorySchema(ma.Schema):
-    class Meta:
-        fields = ('id', 'name')
-
-category_schema = CategorySchema() 
-categories_schema = CategorySchema(many=True)
 
 ####### Questions ##############
 
@@ -122,6 +85,8 @@ class Questions(db.Model):
     db.Column('quizid', db.Integer, db.ForeignKey('quiz.id')),
     db.Column('question', db.String(200)),
     db.Column('correct_answer', db.Integer, db.ForeignKey('answers.id')))
+
+    answers = relationship("Answers", primaryjoin="and_(Questions.id == Answers.questionid)", backref=db.backref("questions", lazy="joined"))
 
     def __init__(self, quizid, question, correct_answer):
         self.quizid = quizid
@@ -150,10 +115,217 @@ class Answers(db.Model):
 class AnswersSchema(ma.Schema):
     class Meta:
         fields = ('id', 'questionid', 'answer')
+        session = db.Session
 
 answer_schema = AnswersSchema() 
 answers_schema = AnswersSchema(many=True)
 
 
-# if __name__ == '__main__':
-#     app.run(debug=True)
+################### RESOURCES #######################
+
+####### User Manager ##############
+class UserManager(Resource):
+    
+    @staticmethod
+    @auto.doc()
+    def get():
+        try: username = request.args['username']
+        except Exception as _: username = None
+
+        if not username:
+            users = User.query.all()
+            return make_response(jsonify(users_schema.dump(users)), 200)
+        elif User.query.filter_by(username = username).first() != None:
+            user = User.query.filter_by(username = username).first()
+            return make_response(jsonify(user_schema.dump(user)), 200)
+        else:
+            return make_response(jsonify({'Message': 'NOT FOUND'}), 404)
+        
+        return make_response(jsonify({'Message': 'BAD REQUEST'}), 400)
+
+    @staticmethod
+    @auto.doc()
+    def post():
+        username = request.json['username']
+        password = request.json['password']
+
+        if (username and password) != None and User.query.filter_by(username = username).first() == None:
+            user = User(username, password)
+            db.session.add(user)
+            db.session.commit()
+            return make_response(jsonify({'Message': f'User {username} inserted.'}), 201)
+        elif User.query.filter_by(username = username).first() != None:
+            return make_response(jsonify({'Message': f'User {username} exist.'}), 409)
+        else:
+            return make_response(jsonify({'Message': 'BAD_REQUEST'}), 400)
+                  
+    @staticmethod
+    @auto.doc()
+    def put():
+        try: username = request.args['username']
+        except Exception as _: username = None
+
+        if not username:
+            return make_response(jsonify({ 'Message': 'Must provide the proper username' }), 400)
+
+        user = User.query.filter_by(username = username).first()
+
+        if user == None:
+            return make_response(jsonify({ 'Message': 'User not exist!' }), 404)
+
+        username_new = request.json['username']
+        password_new = request.json['password']
+        user.password = password_new
+        user.username = username_new
+
+        db.session.commit()
+        return make_response(jsonify({'Message': f'User {user.username} altered.'}), 200)
+
+    @staticmethod
+    @auto.doc()
+    def patch():
+        try: 
+            username = request.args['username']
+        except Exception as _: 
+            username = None
+            
+        try:
+            username_new = request.json['username']
+        except Exception as _:
+            username_new = None
+
+        try:
+            password_new = request.json['password']
+        except Exception as _:
+            password_new = None
+
+        if username == None:
+            return make_response(jsonify({ 'Message': 'Must provide the proper username' }), 400)
+
+        user = User.query.filter_by(username = username).first()
+
+        if user == None:
+            return make_response(jsonify({ 'Message': 'User not exist!' }), 404)
+
+        if username_new != None:
+            user.username = username_new
+
+        if password_new != None:
+            user.password = password_new 
+
+        db.session.commit()
+        return make_response(jsonify({'Message': f'User {user.username} altered.'}), 200)
+
+    @staticmethod
+    @auto.doc()
+    def delete():
+        try: username = request.args['username']
+        except Exception as _: username = None
+
+        if not username:
+            return make_response(jsonify({ 'Message': 'Must provide the user username' }), 400)
+
+        user = User.query.filter_by(username = username).first()
+        stats = Stats.query.filter_by(userid = user.id).all()
+
+        if user == None:
+            return make_response(jsonify({ 'Message': 'User not exist!' }), 404)
+
+        db.session.delete(user)
+        db.session.delete(stats)
+        db.session.commit()
+
+        return make_response(jsonify({'Message': f'User {username} deleted.'}), 200)
+
+####### Quiz Manager ##############
+class QuizManager(Resource):
+
+    @staticmethod
+    @auto.doc()
+    def get():
+        try: category_name = request.args['category_name']
+        except Exception as _: category_name = None
+
+        if category_name != None:
+            # result = db.session.query(Quiz, Questions, Answers).join(Questions, Questions.id == Quiz.id).join(Answers, Answers.questionid == Questions.id).filter_by(Quiz.category_name == category_name).all()
+            if  Quiz.query.filter_by(category_name = category_name).first() != None:
+                return make_response(jsonify(getQuiz(category_name)), 200)
+            else:
+                return make_response(jsonify({ 'Message': 'NOT FOUND' }), 404)
+        else:
+            return make_response(jsonify({ 'Message': 'BAD REQUEST' }), 400)
+
+####### Stats Manager ##############
+class StatsManager(Resource):
+    
+    @staticmethod
+    @auto.doc()
+    def get():
+        try: userid = request.args['userid']  
+        except Exception as _: userid = None
+
+        if userid != None:
+            stats = Stats.query.filter_by(userid = userid).all()
+            return make_response(jsonify(stats_schema.dump(stats)), 200)
+        else:
+            stats = Stats.query.all()
+            return make_response(jsonify(users_schema.dump(stats)), 200)
+        
+        return make_response(jsonify({'Message': 'BAD REQUEST'}), 400)
+                  
+    @staticmethod
+    @auto.doc()
+    def patch():
+        try: 
+            userid = request.json['userid']
+            quizid = request.json['quizid']
+            score = request.json['score']
+        except Exception as _: 
+            userid = None
+            quizid = None
+            score = None
+            
+        if (userid and quizid and score) != None:
+            stat = Stats.uery.filter_by(userid = userid, quizid = quizid).first()
+            if score > stat.score:
+                stat.score = score
+            db.session.commit()
+            return make_response(jsonify({ 'Message': 'OK' }), 200)
+        else:
+            return make_response(jsonify({'Message': 'BAD REQUEST'}), 400)
+
+####### Functions ##############
+
+def getQuiz(category_name):
+    quiz = Quiz.query.filter_by(category_name = category_name).first()
+    questions = Questions.query.filter_by(quizid = quiz.id).all()
+    result = []
+
+    random.shuffle(questions)
+
+    if len(questions) >= 10:
+        questions = questions[:10]
+
+    for question in questions:
+        tmpDict = {}
+        tmpDict['Question'] = question_schema.dump(question)
+        answersArr = Answers.query.filter_by(questionid = question.id).all()
+        random.shuffle(answersArr)
+        tmpDict['Answers'] = answers_schema.dump(answersArr)
+        result.append(tmpDict)
+    return result
+
+####### Documentation ##############
+
+@app.route('/doc')
+def documentation():
+    return auto.html()
+
+####### Resource Mapping ##############
+
+api.add_resource(UserManager, '/api/users')
+api.add_resource(QuizManager, '/api/quizes')
+api.add_resource(StatsManager, '/api/stats')
+
+if __name__ == '__main__':
+    app.run(debug=True)

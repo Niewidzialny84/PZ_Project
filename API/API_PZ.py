@@ -7,7 +7,9 @@ from marshmallow import fields, validate
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 import json, random
-from flask_selfdoc import Autodoc
+from apispec import APISpec
+from apispec.ext.marshmallow import MarshmallowPlugin
+from apispec_webframeworks.flask import FlaskPlugin
 
 app = Flask(__name__) 
 api = Api(app) 
@@ -15,19 +17,27 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///pzDatabase.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True 
 db = SQLAlchemy(app) 
 ma = Marshmallow(app)
-auto = Autodoc(app)
 
 ####### User ##############
 
 class User(db.Model): 
-    user  = db.Table('user', 
+    user  = db.Table('user',
     db.Column('id', db.Integer, primary_key=True),
     db.Column('username', db.String(64), unique=True),
-    db.Column('password', db.String(128)))
+    db.Column('password', db.String(128)),
+    sqlite_autoincrement=True)
 
     def __init__(self, username, password):
         self.username = username
         self.password = password
+
+# Create an APISpec
+spec = APISpec(
+    title="Swagger Quiz",
+    version="1.0.0",
+    openapi_version="3.0.2",
+    plugins=[FlaskPlugin(), MarshmallowPlugin()],
+)
 
 class UserSchema(ma.Schema):
     class Meta:
@@ -40,11 +50,12 @@ users_schema = UserSchema(many=True)
 ####### Stats ##############
 
 class Stats(db.Model): 
-    stats  = db.Table('stats', 
+    stats  = db.Table('stats',
     db.Column('id', db.Integer, primary_key=True),
     db.Column('userid', db.Integer, db.ForeignKey('user.id')),
     db.Column('quizid', db.Integer, db.ForeignKey('quiz.id')),
-    db.Column('score', db.Integer))
+    db.Column('score', db.Integer),
+    sqlite_autoincrement=True)
 
     def __init__(self, userid, quizid, score):
         self.userid = userid
@@ -63,8 +74,9 @@ stats_schema = StatsSchema(many=True)
 
 class Quiz(db.Model): 
     quiz  = db.Table('quiz',
-    db.Column('id', db.Integer, primary_key=True), 
-    db.Column('category_name', db.String(200)))
+    db.Column('id', db.Integer, primary_key=True),
+    db.Column('category_name', db.String(200)),
+    sqlite_autoincrement=True)
 
     questions = relationship("Questions", primaryjoin="and_(Quiz.id == Questions.quizid)", backref=db.backref("quiz", lazy="joined"))
 
@@ -81,10 +93,11 @@ quizzes_schema = QuizSchema(many=True)
 
 class Questions(db.Model): 
     questions  = db.Table('questions',
-    db.Column('id', db.Integer, primary_key=True), 
+    db.Column('id', db.Integer, primary_key=True),
     db.Column('quizid', db.Integer, db.ForeignKey('quiz.id')),
     db.Column('question', db.String(200)),
-    db.Column('correct_answer', db.Integer, db.ForeignKey('answers.id')))
+    db.Column('correct_answer', db.Integer, db.ForeignKey('answers.id')),
+    sqlite_autoincrement=True)
 
     answers = relationship("Answers", primaryjoin="and_(Questions.id == Answers.questionid)", backref=db.backref("questions", lazy="joined"))
 
@@ -104,9 +117,10 @@ questions_schema = QuestionsSchema(many=True)
 
 class Answers(db.Model): 
     answers  = db.Table('answers',
-    db.Column('id', db.Integer, primary_key=True), 
+    db.Column('id', db.Integer, primary_key=True, autoincrement=True), 
     db.Column('questionid', db.Integer, db.ForeignKey('questions.id')),
-    db.Column('answer', db.String(200)))
+    db.Column('answer', db.String(200)),
+    sqlite_autoincrement=True)
 
     def __init__(self, questionid, answer):
         self.questionid = questionid
@@ -120,14 +134,11 @@ class AnswersSchema(ma.Schema):
 answer_schema = AnswersSchema() 
 answers_schema = AnswersSchema(many=True)
 
-
 ################### RESOURCES #######################
 
 ####### User Manager ##############
 class UserManager(Resource):
-    
     @staticmethod
-    @auto.doc()
     def get():
         try: username = request.args['username']
         except Exception as _: username = None
@@ -144,10 +155,13 @@ class UserManager(Resource):
         return make_response(jsonify({'Message': 'BAD REQUEST'}), 400)
 
     @staticmethod
-    @auto.doc()
     def post():
-        username = request.json['username']
-        password = request.json['password']
+        try:  
+            username = request.json['username']
+            password = request.json['password']
+        except Exception as _:
+            username = None
+            password = None
 
         if (username and password) != None and User.query.filter_by(username = username).first() == None:
             user = User(username, password)
@@ -160,44 +174,41 @@ class UserManager(Resource):
             return make_response(jsonify({'Message': 'BAD_REQUEST'}), 400)
                   
     @staticmethod
-    @auto.doc()
     def put():
         try: username = request.args['username']
         except Exception as _: username = None
 
-        if not username:
-            return make_response(jsonify({ 'Message': 'Must provide the proper username' }), 400)
+        try:  
+            username_new = request.json['username']
+            password_new = request.json['password']
+        except Exception as _:
+            username_new = None
+            password_new = None
+
+        if not username or username_new == None or password_new == None:
+            return make_response(jsonify({ 'Message': 'Must provide the proper data' }), 400)
 
         user = User.query.filter_by(username = username).first()
 
         if user == None:
             return make_response(jsonify({ 'Message': 'User not exist!' }), 404)
 
-        username_new = request.json['username']
-        password_new = request.json['password']
         user.password = password_new
         user.username = username_new
 
         db.session.commit()
         return make_response(jsonify({'Message': f'User {user.username} altered.'}), 200)
 
-    @staticmethod
-    @auto.doc()
+    @staticmethod    
     def patch():
-        try: 
-            username = request.args['username']
-        except Exception as _: 
-            username = None
+        try:  username = request.args['username']
+        except Exception as _: username = None
             
-        try:
-            username_new = request.json['username']
-        except Exception as _:
-            username_new = None
+        try: username_new = request.json['username']
+        except Exception as _: username_new = None
 
-        try:
-            password_new = request.json['password']
-        except Exception as _:
-            password_new = None
+        try: password_new = request.json['password']
+        except Exception as _: password_new = None
 
         if username == None:
             return make_response(jsonify({ 'Message': 'Must provide the proper username' }), 400)
@@ -217,7 +228,6 @@ class UserManager(Resource):
         return make_response(jsonify({'Message': f'User {user.username} altered.'}), 200)
 
     @staticmethod
-    @auto.doc()
     def delete():
         try: username = request.args['username']
         except Exception as _: username = None
@@ -232,8 +242,10 @@ class UserManager(Resource):
             return make_response(jsonify({ 'Message': 'User not exist!' }), 404)
 
         db.session.delete(user)
-        db.session.delete(stats)
         db.session.commit()
+        for s in stats:
+            db.session.delete(s)
+            db.session.commit()
 
         return make_response(jsonify({'Message': f'User {username} deleted.'}), 200)
 
@@ -241,7 +253,6 @@ class UserManager(Resource):
 class QuizManager(Resource):
 
     @staticmethod
-    @auto.doc()
     def get():
         try: category_name = request.args['category_name']
         except Exception as _: category_name = None
@@ -259,7 +270,6 @@ class QuizManager(Resource):
 class StatsManager(Resource):
     
     @staticmethod
-    @auto.doc()
     def get():
         try: userid = request.args['userid']  
         except Exception as _: userid = None
@@ -274,7 +284,6 @@ class StatsManager(Resource):
         return make_response(jsonify({'Message': 'BAD REQUEST'}), 400)
                   
     @staticmethod
-    @auto.doc()
     def patch():
         try: 
             userid = request.json['userid']
@@ -286,10 +295,15 @@ class StatsManager(Resource):
             score = None
             
         if (userid and quizid and score) != None:
-            stat = Stats.uery.filter_by(userid = userid, quizid = quizid).first()
-            if score > stat.score:
-                stat.score = score
-            db.session.commit()
+            stat = Stats.query.filter_by(userid = userid, quizid = quizid).first()
+            if stat == None:
+                stat = Stats(userid, quizid, score)
+                db.session.add(stat)
+                db.session.commit()
+            else:    
+                if score > stat.score:
+                    stat.score = score
+                    db.session.commit()
             return make_response(jsonify({ 'Message': 'OK' }), 200)
         else:
             return make_response(jsonify({'Message': 'BAD REQUEST'}), 400)
@@ -317,14 +331,17 @@ def getQuiz(category_name):
 
 ####### Documentation ##############
 
-@app.route('/doc')
-def documentation():
-    return auto.html()
+@app.route("/spec")
+def spec():
+    swag = swagger(app)
+    swag['info']['version'] = "1.0"
+    swag['info']['title'] = "My API"
+    return jsonify(swag)
 
 ####### Resource Mapping ##############
 
 api.add_resource(UserManager, '/api/users')
-api.add_resource(QuizManager, '/api/quizes')
+api.add_resource(QuizManager, '/api/quizzes')
 api.add_resource(StatsManager, '/api/stats')
 
 if __name__ == '__main__':

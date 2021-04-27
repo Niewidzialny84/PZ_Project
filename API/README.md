@@ -9,6 +9,9 @@ API - documentation
 
 This is a API and the database schema that is used by server to get the needed data from db using endpoints.
 
+# Link to Postman:
+https://www.getpostman.com/collections/1d6a4248406e6ff0c984
+
 # Table of Contents
 
 [TOC]

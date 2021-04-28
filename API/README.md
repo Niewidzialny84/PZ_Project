@@ -18,10 +18,10 @@ https://www.getpostman.com/collections/1d6a4248406e6ff0c984
 
 # Endpoints
 ## 1. api/users
-**[GET]** `api/users?username=<string:username>`
-**Description:** return data about user with given username.
-**Params:** `URI: <string:username>`
-**Example response:**
+**[GET]** `api/users?username=<string:username>`\
+**Description:** return data about user with given username.\
+**Params:** `URI: <string:username>`\
+**Example response:**\
 ```gherkin=
 200 OK
 {
@@ -32,9 +32,9 @@ https://www.getpostman.com/collections/1d6a4248406e6ff0c984
 ```
 
 **[GET]** `api/users`
-**Description:** return data about all users.
-**Params:** `None`
-**Example response:**
+**Description:** return data about all users.\
+**Params:** `None`\
+**Example response:**\
 ```gherkin=
 200 OK
 [
@@ -52,41 +52,41 @@ https://www.getpostman.com/collections/1d6a4248406e6ff0c984
 ```
 
 **[POST]** `api/users`
-**Description:** add new user with given username and password.
-**Params:** `JSON:`
+**Description:** add new user with given username and password.\
+**Params:** `JSON:`\
 ```gherkin=
 {
     "username": "multiUser",
     "password": "pass"
 }
 ```
-**Example response:** `201 CREATED`
+**Example response:** `201 CREATED`\
 
-**[PUT]** `api/users?username=<string:username>`
-**Description:** change all params in specific user entity for given username.
-**Params:** `URI: <string:username>` `JSON:`
+**[PUT]** `api/users?username=<string:username>`\
+**Description:** change all params in specific user entity for given username.\
+**Params:** `URI: <string:username>` `JSON:`\
 ```gherkin=
 {
     "username": "new_username",
     "password": "new_password"
 }
 ```
-**Example response:** `200 ALTERED`
+**Example response:** `200 ALTERED`\
 
-**[PATCH]** `api/users?username=<string:username>`
-**Description:** change username or password in specific user entity for given username.
-**Params:** `URI: <string:username>` `JSON:`
+**[PATCH]** `api/users?username=<string:username>`\
+**Description:** change username or password in specific user entity for given username.\
+**Params:** `URI: <string:username>` `JSON:`\
 ```gherkin=
 {
     "username": "new_username"
 }
 ```
-**Example response:** `200 ALTERED`
+**Example response:** `200 ALTERED`\
 
-**[DELETE]** `api/users?username=<string:username>`
-**Description:** delete specific user entity for given username.
-**Params:** `URI: <string:username>` 
-**Example response:** 
+**[DELETE]** `api/users?username=<string:username>`\
+**Description:** delete specific user entity for given username.\
+**Params:** `URI: <string:username>`\
+**Example response:**\
 ```gherkin=
 200 OK
 {
@@ -95,10 +95,10 @@ https://www.getpostman.com/collections/1d6a4248406e6ff0c984
 ```
 ## 2. api/quizzes
 
-**[GET]** `api/quizzes?category_name=<string:category_name>`
-**Description:** return set of questions for given category name.
-**Params:** `URI: <string:category_name>`
-**Example response:**
+**[GET]** `api/quizzes?category_name=<string:category_name>`\
+**Description:** return set of questions for given category name.\
+**Params:** `URI: <string:category_name>`\
+**Example response:**\
 ```gherkin=
 200 OK
 [
@@ -167,10 +167,10 @@ https://www.getpostman.com/collections/1d6a4248406e6ff0c984
 
 ## 3. api/stats
 
-**[GET]** `api/stats?userid=<string:userid>`
-**Description:** return stats array for user with given userid.
-**Params:** `URI: <string:userid>`
-**Example response:**
+**[GET]** `api/stats?userid=<string:userid>`\
+**Description:** return stats array for user with given userid.\
+**Params:** `URI: <string:userid>`\
+**Example response:**\
 ```gherkin=
 200 OK
 [
@@ -189,9 +189,9 @@ https://www.getpostman.com/collections/1d6a4248406e6ff0c984
 ]
 ```
 
-**[PATCH]** `api/stats`
-**Description:** create if not exist or update stats for user with given userid if current score is higher than current value stored in database.
-**Params:** `JSON:`
+**[PATCH]** `api/stats`\
+**Description:** create if not exist or update stats for user with given userid if current score is higher than current value stored in database.\
+**Params:** `JSON:`\
 ```gherkin=
 {
     "userid" : 1,
@@ -199,5 +199,5 @@ https://www.getpostman.com/collections/1d6a4248406e6ff0c984
     "score":1
 }
 ```
-**Example response:** `200 OK`
+**Example response:** `200 OK`\
 

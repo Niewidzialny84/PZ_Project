@@ -29,35 +29,36 @@ namespace DesktopApp
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.questionLabel = new System.Windows.Forms.Label();
+            this.numberLabel = new System.Windows.Forms.Label();
             this.resignButton = new System.Windows.Forms.Button();
             this.aButton = new System.Windows.Forms.Button();
             this.bButton = new System.Windows.Forms.Button();
             this.cButton = new System.Windows.Forms.Button();
             this.dButton = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
+            this.timeLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label1
+            // questionLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(344, 29);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 29);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Question";
+            this.questionLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.questionLabel.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.questionLabel.Location = new System.Drawing.Point(53, 38);
+            this.questionLabel.Name = "questionLabel";
+            this.questionLabel.Size = new System.Drawing.Size(654, 102);
+            this.questionLabel.TabIndex = 0;
+            this.questionLabel.Text = "Question";
+            this.questionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label2
+            // numberLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(684, 12);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(116, 29);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "1 out of 10";
+            this.numberLabel.AutoSize = true;
+            this.numberLabel.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.numberLabel.Location = new System.Drawing.Point(658, -2);
+            this.numberLabel.Name = "numberLabel";
+            this.numberLabel.Size = new System.Drawing.Size(116, 29);
+            this.numberLabel.TabIndex = 1;
+            this.numberLabel.Text = "1 out of 10";
             // 
             // resignButton
             // 
@@ -79,6 +80,7 @@ namespace DesktopApp
             this.aButton.TabIndex = 3;
             this.aButton.Text = "Answer A";
             this.aButton.UseVisualStyleBackColor = true;
+            this.aButton.Click += new System.EventHandler(this.aButton_Click);
             // 
             // bButton
             // 
@@ -89,6 +91,7 @@ namespace DesktopApp
             this.bButton.TabIndex = 4;
             this.bButton.Text = "Answer B";
             this.bButton.UseVisualStyleBackColor = true;
+            this.bButton.Click += new System.EventHandler(this.bButton_Click);
             // 
             // cButton
             // 
@@ -99,6 +102,7 @@ namespace DesktopApp
             this.cButton.TabIndex = 5;
             this.cButton.Text = "Answer C";
             this.cButton.UseVisualStyleBackColor = true;
+            this.cButton.Click += new System.EventHandler(this.cButton_Click);
             // 
             // dButton
             // 
@@ -109,30 +113,31 @@ namespace DesktopApp
             this.dButton.TabIndex = 6;
             this.dButton.Text = "Answer D";
             this.dButton.UseVisualStyleBackColor = true;
+            this.dButton.Click += new System.EventHandler(this.dButton_Click);
             // 
-            // label3
+            // timeLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(642, 50);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(158, 26);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Time Left: 100 s";
+            this.timeLabel.AutoSize = true;
+            this.timeLabel.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.timeLabel.Location = new System.Drawing.Point(523, 409);
+            this.timeLabel.Name = "timeLabel";
+            this.timeLabel.Size = new System.Drawing.Size(265, 26);
+            this.timeLabel.TabIndex = 7;
+            this.timeLabel.Text = "Time Remaining: 100 seconds";
             // 
             // QuestionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.timeLabel);
             this.Controls.Add(this.dButton);
             this.Controls.Add(this.cButton);
             this.Controls.Add(this.bButton);
             this.Controls.Add(this.aButton);
             this.Controls.Add(this.resignButton);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.numberLabel);
+            this.Controls.Add(this.questionLabel);
             this.Name = "QuestionForm";
             this.Text = "QuestionForm";
             this.ResumeLayout(false);
@@ -142,13 +147,13 @@ namespace DesktopApp
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label questionLabel;
+        private System.Windows.Forms.Label numberLabel;
         private System.Windows.Forms.Button resignButton;
         private System.Windows.Forms.Button aButton;
         private System.Windows.Forms.Button bButton;
         private System.Windows.Forms.Button cButton;
         private System.Windows.Forms.Button dButton;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label timeLabel;
     }
 }

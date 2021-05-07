@@ -23,7 +23,7 @@ namespace DesktopApp
             Graphics gradientg = e.Graphics;
             Pen pen = new Pen(Color.FromArgb(0, 0, 0), 1);
             Rectangle rect = new Rectangle(0, 0, this.Width - 1, this.Height - 1);
-            LinearGradientBrush lgb = new LinearGradientBrush(rect, Color.FromArgb(200, 198, 167), Color.FromArgb(255, 255, 255), LinearGradientMode.Vertical);
+            LinearGradientBrush lgb = new LinearGradientBrush(rect, Color.FromArgb(185, 26, 26), Color.FromArgb(66, 21, 191), LinearGradientMode.Vertical);
             gradientg.FillRectangle(lgb, rect);
             gradientg.DrawRectangle(pen, rect);
 

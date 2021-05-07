@@ -19,10 +19,23 @@ namespace DesktopApp
         }
         private string username;
         private string password;
+        private string message;
+        private int correctQuestions;
+        private double time;
         public EndForm(string username, string password)
         {
             this.username = username;
             this.password = password;
+            InitializeComponent();
+        }
+        public EndForm(string username, string password, string message, int correctQuestions, double timeleft)
+        {
+            this.message = message;
+            this.username = username;
+            this.password = password;
+            this.correctQuestions = correctQuestions;
+            this.time=timeleft;
+           
             InitializeComponent();
         }
 
@@ -32,5 +45,14 @@ namespace DesktopApp
             this.Close() ;
             mainForm.Show();
         }
+
+        private void EndForm_Load(object sender, EventArgs e)
+        {
+            this.messageLabel.Text = message;
+            this.timeLeft.Text = "Time left:\n" + time.ToString();
+            this.totalResult.Text = "Total result:\n" + countResult(correctQuestions,Convert.ToInt32(time)).ToString();
+        }
+        int countResult(int correctAnswers,int timeLeft) => (correctAnswers* 7 + 2 * (timeLeft / 5));    
+        
     }
 }

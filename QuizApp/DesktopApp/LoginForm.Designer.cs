@@ -62,8 +62,9 @@ namespace DesktopApp
             // 
             // log_box
             // 
-            this.log_box.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(198)))), ((int)(((byte)(167)))));
+            this.log_box.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(85)))), ((int)(((byte)(96)))));
             this.log_box.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.log_box.ForeColor = System.Drawing.SystemColors.Window;
             this.log_box.Location = new System.Drawing.Point(258, 114);
             this.log_box.Name = "log_box";
             this.log_box.PlaceholderText = "Username";
@@ -72,8 +73,9 @@ namespace DesktopApp
             // 
             // pass_box
             // 
-            this.pass_box.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(198)))), ((int)(((byte)(167)))));
+            this.pass_box.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(85)))), ((int)(((byte)(96)))));
             this.pass_box.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.pass_box.ForeColor = System.Drawing.SystemColors.Window;
             this.pass_box.Location = new System.Drawing.Point(258, 154);
             this.pass_box.Name = "pass_box";
             this.pass_box.PlaceholderText = "Password";
@@ -83,10 +85,10 @@ namespace DesktopApp
             // 
             // loginButton
             // 
-            this.loginButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(198)))), ((int)(((byte)(167)))));
+            this.loginButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(85)))), ((int)(((byte)(96)))));
             this.loginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loginButton.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.loginButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(85)))), ((int)(((byte)(96)))));
+            this.loginButton.ForeColor = System.Drawing.Color.White;
             this.loginButton.Location = new System.Drawing.Point(258, 210);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(191, 43);

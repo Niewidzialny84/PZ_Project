@@ -38,8 +38,10 @@ namespace DesktopApp
                 mainForm.Show();
             }
         }
+       //OBSŁUGA LOGOWANIA 
         private bool login(string username, string password)
         {
+
             return true;
         }
 

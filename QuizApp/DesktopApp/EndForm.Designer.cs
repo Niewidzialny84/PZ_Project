@@ -29,7 +29,7 @@ namespace DesktopApp
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.menuButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -41,15 +41,16 @@ namespace DesktopApp
             this.label9 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // button1
+            // menuButton
             // 
-            this.button1.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(306, 398);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(202, 40);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Main Menu";
-            this.button1.UseVisualStyleBackColor = true;
+            this.menuButton.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.menuButton.Location = new System.Drawing.Point(306, 398);
+            this.menuButton.Name = "menuButton";
+            this.menuButton.Size = new System.Drawing.Size(202, 40);
+            this.menuButton.TabIndex = 0;
+            this.menuButton.Text = "Main Menu";
+            this.menuButton.UseVisualStyleBackColor = true;
+            this.menuButton.Click += new System.EventHandler(this.menuButton_Click);
             // 
             // label1
             // 
@@ -155,7 +156,7 @@ namespace DesktopApp
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.menuButton);
             this.Name = "EndForm";
             this.Text = "EndForm";
             this.ResumeLayout(false);
@@ -165,7 +166,7 @@ namespace DesktopApp
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button menuButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

@@ -16,5 +16,20 @@ namespace DesktopApp
         {
             InitializeComponent();
         }
+        private string username;
+        private string password;
+        public RankingForm(string username, string password)
+        {
+            this.username = username;
+            this.password = password;
+            InitializeComponent();
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = new MainForm(username, password);
+            mainForm.Show();
+            this.Close();
+        }
     }
 }

@@ -31,11 +31,11 @@ namespace DesktopApp
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.resignButton = new System.Windows.Forms.Button();
+            this.aButton = new System.Windows.Forms.Button();
+            this.bButton = new System.Windows.Forms.Button();
+            this.cButton = new System.Windows.Forms.Button();
+            this.dButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -59,55 +59,56 @@ namespace DesktopApp
             this.label2.TabIndex = 1;
             this.label2.Text = "1 out of 10";
             // 
-            // button1
+            // resignButton
             // 
-            this.button1.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(344, 402);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(88, 36);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Resign";
-            this.button1.UseVisualStyleBackColor = true;
+            this.resignButton.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.resignButton.Location = new System.Drawing.Point(344, 402);
+            this.resignButton.Name = "resignButton";
+            this.resignButton.Size = new System.Drawing.Size(88, 36);
+            this.resignButton.TabIndex = 2;
+            this.resignButton.Text = "Resign";
+            this.resignButton.UseVisualStyleBackColor = true;
+            this.resignButton.Click += new System.EventHandler(this.resignButton_Click);
             // 
-            // button2
+            // aButton
             // 
-            this.button2.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button2.Location = new System.Drawing.Point(164, 155);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(446, 33);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Answer A";
-            this.button2.UseVisualStyleBackColor = true;
+            this.aButton.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.aButton.Location = new System.Drawing.Point(164, 155);
+            this.aButton.Name = "aButton";
+            this.aButton.Size = new System.Drawing.Size(446, 33);
+            this.aButton.TabIndex = 3;
+            this.aButton.Text = "Answer A";
+            this.aButton.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // bButton
             // 
-            this.button3.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button3.Location = new System.Drawing.Point(164, 207);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(446, 33);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Answer B";
-            this.button3.UseVisualStyleBackColor = true;
+            this.bButton.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.bButton.Location = new System.Drawing.Point(164, 207);
+            this.bButton.Name = "bButton";
+            this.bButton.Size = new System.Drawing.Size(446, 33);
+            this.bButton.TabIndex = 4;
+            this.bButton.Text = "Answer B";
+            this.bButton.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // cButton
             // 
-            this.button4.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button4.Location = new System.Drawing.Point(164, 257);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(446, 33);
-            this.button4.TabIndex = 5;
-            this.button4.Text = "Answer C";
-            this.button4.UseVisualStyleBackColor = true;
+            this.cButton.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.cButton.Location = new System.Drawing.Point(164, 257);
+            this.cButton.Name = "cButton";
+            this.cButton.Size = new System.Drawing.Size(446, 33);
+            this.cButton.TabIndex = 5;
+            this.cButton.Text = "Answer C";
+            this.cButton.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // dButton
             // 
-            this.button5.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button5.Location = new System.Drawing.Point(164, 307);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(446, 33);
-            this.button5.TabIndex = 6;
-            this.button5.Text = "Answer D";
-            this.button5.UseVisualStyleBackColor = true;
+            this.dButton.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.dButton.Location = new System.Drawing.Point(164, 307);
+            this.dButton.Name = "dButton";
+            this.dButton.Size = new System.Drawing.Size(446, 33);
+            this.dButton.TabIndex = 6;
+            this.dButton.Text = "Answer D";
+            this.dButton.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -125,11 +126,11 @@ namespace DesktopApp
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.dButton);
+            this.Controls.Add(this.cButton);
+            this.Controls.Add(this.bButton);
+            this.Controls.Add(this.aButton);
+            this.Controls.Add(this.resignButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "QuestionForm";
@@ -143,11 +144,11 @@ namespace DesktopApp
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button resignButton;
+        private System.Windows.Forms.Button aButton;
+        private System.Windows.Forms.Button bButton;
+        private System.Windows.Forms.Button cButton;
+        private System.Windows.Forms.Button dButton;
         private System.Windows.Forms.Label label3;
     }
 }

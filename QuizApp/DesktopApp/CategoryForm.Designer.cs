@@ -29,7 +29,7 @@ namespace DesktopApp
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.catButton1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -39,18 +39,19 @@ namespace DesktopApp
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
+            this.backButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // catButton1
             // 
-            this.button1.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(67, 163);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(168, 41);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Cat1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.catButton1.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.catButton1.Location = new System.Drawing.Point(67, 163);
+            this.catButton1.Name = "catButton1";
+            this.catButton1.Size = new System.Drawing.Size(168, 41);
+            this.catButton1.TabIndex = 0;
+            this.catButton1.Text = "Cat1";
+            this.catButton1.UseVisualStyleBackColor = true;
+            this.catButton1.Click += new System.EventHandler(this.catButton1_Click);
             // 
             // label1
             // 
@@ -142,22 +143,23 @@ namespace DesktopApp
             this.button9.Text = "Cat7";
             this.button9.UseVisualStyleBackColor = true;
             // 
-            // button10
+            // backButton
             // 
-            this.button10.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button10.Location = new System.Drawing.Point(273, 351);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(168, 41);
-            this.button10.TabIndex = 10;
-            this.button10.Text = "Back";
-            this.button10.UseVisualStyleBackColor = true;
+            this.backButton.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.backButton.Location = new System.Drawing.Point(273, 351);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(168, 41);
+            this.backButton.TabIndex = 10;
+            this.backButton.Text = "Back";
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
             // CategoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 441);
-            this.Controls.Add(this.button10);
+            this.Controls.Add(this.backButton);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button9);
@@ -167,7 +169,7 @@ namespace DesktopApp
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.catButton1);
             this.Name = "CategoryForm";
             this.Text = "CategoryForm";
             this.ResumeLayout(false);
@@ -177,7 +179,7 @@ namespace DesktopApp
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button catButton1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
@@ -187,6 +189,6 @@ namespace DesktopApp
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button backButton;
     }
 }

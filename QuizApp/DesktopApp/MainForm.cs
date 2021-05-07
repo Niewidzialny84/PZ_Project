@@ -36,17 +36,23 @@ namespace DesktopApp
 
         private void playButton_Click(object sender, EventArgs e)
         {
-
+            CategoryForm categoryForm = new CategoryForm(username, password);
+            categoryForm.Show();
+            this.Close();
         }
 
         private void statsButton_Click(object sender, EventArgs e)
         {
-
+            StatsForm statsForm = new StatsForm(username, password);
+            statsForm.Show();
+            this.Close();
         }
 
         private void rankingButton_Click(object sender, EventArgs e)
         {
-
+            RankingForm rankingForm = new RankingForm(username, password);
+            rankingForm.Show();
+            this.Close();
         }
     }
 }

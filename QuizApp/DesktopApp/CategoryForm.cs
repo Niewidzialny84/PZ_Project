@@ -25,5 +25,19 @@ namespace DesktopApp
             InitializeComponent();
         }
 
+        private void catButton1_Click(object sender, EventArgs e)
+        {
+            QuestionForm questionForm = new QuestionForm(username, password);
+            questionForm.Show();
+            this.Close();
+           
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = new MainForm(username, password);
+            mainForm.Show();
+            this.Close();
+        }
     }
 }

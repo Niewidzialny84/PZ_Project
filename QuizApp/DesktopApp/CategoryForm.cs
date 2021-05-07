@@ -12,9 +12,17 @@ namespace DesktopApp
 {
     public partial class CategoryForm : Form
     {
+        private 
         public CategoryForm()
         {
             InitializeComponent();
         }
+        public CategoryForm(string username, string password)
+        {
+            this.username = username;
+            this.password = password;
+            InitializeComponent();
+        }
+
     }
 }

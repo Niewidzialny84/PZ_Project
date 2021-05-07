@@ -29,63 +29,68 @@ namespace DesktopApp
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.usernameLabel = new System.Windows.Forms.Label();
+            this.logoutButton = new System.Windows.Forms.Button();
+            this.statsButton = new System.Windows.Forms.Button();
+            this.rankingButton = new System.Windows.Forms.Button();
+            this.playButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label1
+            // usernameLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(269, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(192, 29);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Hello Niewidzialny";
+            this.usernameLabel.AutoSize = true;
+            this.usernameLabel.Cursor = System.Windows.Forms.Cursors.Default;
+            this.usernameLabel.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.usernameLabel.Location = new System.Drawing.Point(265, 28);
+            this.usernameLabel.Name = "usernameLabel";
+            this.usernameLabel.Size = new System.Drawing.Size(192, 29);
+            this.usernameLabel.TabIndex = 0;
+            this.usernameLabel.Text = "Hello Niewidzialny";
+            this.usernameLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // button1
+            // logoutButton
             // 
-            this.button1.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(245, 253);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(227, 39);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Logout";
-            this.button1.UseVisualStyleBackColor = true;
+            this.logoutButton.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.logoutButton.Location = new System.Drawing.Point(245, 253);
+            this.logoutButton.Name = "logoutButton";
+            this.logoutButton.Size = new System.Drawing.Size(227, 39);
+            this.logoutButton.TabIndex = 1;
+            this.logoutButton.Text = "Logout";
+            this.logoutButton.UseVisualStyleBackColor = true;
+            this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
             // 
-            // button2
+            // statsButton
             // 
-            this.button2.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button2.Location = new System.Drawing.Point(245, 118);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(227, 39);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Stats";
-            this.button2.UseVisualStyleBackColor = true;
+            this.statsButton.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.statsButton.Location = new System.Drawing.Point(245, 118);
+            this.statsButton.Name = "statsButton";
+            this.statsButton.Size = new System.Drawing.Size(227, 39);
+            this.statsButton.TabIndex = 2;
+            this.statsButton.Text = "Stats";
+            this.statsButton.UseVisualStyleBackColor = true;
+            this.statsButton.Click += new System.EventHandler(this.statsButton_Click);
             // 
-            // button3
+            // rankingButton
             // 
-            this.button3.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button3.Location = new System.Drawing.Point(245, 163);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(227, 39);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Global Rankings";
-            this.button3.UseVisualStyleBackColor = true;
+            this.rankingButton.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.rankingButton.Location = new System.Drawing.Point(245, 163);
+            this.rankingButton.Name = "rankingButton";
+            this.rankingButton.Size = new System.Drawing.Size(227, 39);
+            this.rankingButton.TabIndex = 3;
+            this.rankingButton.Text = "Global Rankings";
+            this.rankingButton.UseVisualStyleBackColor = true;
+            this.rankingButton.Click += new System.EventHandler(this.rankingButton_Click);
             // 
-            // button5
+            // playButton
             // 
-            this.button5.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button5.Location = new System.Drawing.Point(245, 73);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(227, 39);
-            this.button5.TabIndex = 5;
-            this.button5.Text = "Play";
-            this.button5.UseVisualStyleBackColor = true;
+            this.playButton.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.playButton.Location = new System.Drawing.Point(245, 73);
+            this.playButton.Name = "playButton";
+            this.playButton.Size = new System.Drawing.Size(227, 39);
+            this.playButton.TabIndex = 5;
+            this.playButton.Text = "Play";
+            this.playButton.UseVisualStyleBackColor = true;
+            this.playButton.Click += new System.EventHandler(this.playButton_Click);
             // 
             // MainForm
             // 
@@ -93,11 +98,11 @@ namespace DesktopApp
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(198)))), ((int)(((byte)(167)))));
             this.ClientSize = new System.Drawing.Size(704, 441);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.playButton);
+            this.Controls.Add(this.rankingButton);
+            this.Controls.Add(this.statsButton);
+            this.Controls.Add(this.logoutButton);
+            this.Controls.Add(this.usernameLabel);
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.ResumeLayout(false);
@@ -107,10 +112,10 @@ namespace DesktopApp
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label usernameLabel;
+        private System.Windows.Forms.Button logoutButton;
+        private System.Windows.Forms.Button statsButton;
+        private System.Windows.Forms.Button rankingButton;
+        private System.Windows.Forms.Button playButton;
     }
 }

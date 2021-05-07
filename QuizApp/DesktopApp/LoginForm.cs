@@ -28,5 +28,21 @@ namespace DesktopApp
             gradientg.DrawRectangle(pen, rect);
 
         }
+
+        private void loginButton_Click(object sender, EventArgs e)
+        {
+            if (login(log_box.Text,pass_box.Text))
+            {
+                MainForm mainForm = new MainForm(log_box.Text, pass_box.Text);
+                this.Hide();
+                mainForm.Show();
+            }
+        }
+        private bool login(string username, string password)
+        {
+            return true;
+        }
+
+        
     }
 }

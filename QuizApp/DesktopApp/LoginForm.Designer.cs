@@ -32,8 +32,8 @@ namespace DesktopApp
             this.name_lbl = new System.Windows.Forms.Label();
             this.top_lbl = new System.Windows.Forms.Label();
             this.log_box = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.pass_box = new System.Windows.Forms.TextBox();
+            this.loginButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // name_lbl
@@ -70,29 +70,30 @@ namespace DesktopApp
             this.log_box.Size = new System.Drawing.Size(191, 34);
             this.log_box.TabIndex = 4;
             // 
-            // textBox1
+            // pass_box
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(198)))), ((int)(((byte)(167)))));
-            this.textBox1.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox1.Location = new System.Drawing.Point(258, 154);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.PlaceholderText = "Password";
-            this.textBox1.Size = new System.Drawing.Size(191, 34);
-            this.textBox1.TabIndex = 5;
-            this.textBox1.UseSystemPasswordChar = true;
+            this.pass_box.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(198)))), ((int)(((byte)(167)))));
+            this.pass_box.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.pass_box.Location = new System.Drawing.Point(258, 154);
+            this.pass_box.Name = "pass_box";
+            this.pass_box.PlaceholderText = "Password";
+            this.pass_box.Size = new System.Drawing.Size(191, 34);
+            this.pass_box.TabIndex = 5;
+            this.pass_box.UseSystemPasswordChar = true;
             // 
-            // button1
+            // loginButton
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(198)))), ((int)(((byte)(167)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(85)))), ((int)(((byte)(96)))));
-            this.button1.Location = new System.Drawing.Point(258, 210);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(191, 43);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Login";
-            this.button1.UseVisualStyleBackColor = false;
+            this.loginButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(198)))), ((int)(((byte)(167)))));
+            this.loginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.loginButton.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.loginButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(85)))), ((int)(((byte)(96)))));
+            this.loginButton.Location = new System.Drawing.Point(258, 210);
+            this.loginButton.Name = "loginButton";
+            this.loginButton.Size = new System.Drawing.Size(191, 43);
+            this.loginButton.TabIndex = 6;
+            this.loginButton.Text = "Login";
+            this.loginButton.UseVisualStyleBackColor = false;
+            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
             // 
             // LoginForm
             // 
@@ -100,8 +101,8 @@ namespace DesktopApp
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(150)))), ((int)(((byte)(125)))));
             this.ClientSize = new System.Drawing.Size(704, 441);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.loginButton);
+            this.Controls.Add(this.pass_box);
             this.Controls.Add(this.log_box);
             this.Controls.Add(this.top_lbl);
             this.Controls.Add(this.name_lbl);
@@ -118,8 +119,8 @@ namespace DesktopApp
         private System.Windows.Forms.Label name_lbl;
         private System.Windows.Forms.Label top_lbl;
         private System.Windows.Forms.TextBox log_box;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox pass_box;
+        private System.Windows.Forms.Button loginButton;
     }
 }
 

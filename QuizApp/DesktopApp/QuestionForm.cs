@@ -15,6 +15,7 @@ namespace DesktopApp
         public QuestionForm()
         {
             InitializeComponent();
+
         }
     }
 }

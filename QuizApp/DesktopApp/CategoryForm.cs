@@ -12,7 +12,8 @@ namespace DesktopApp
 {
     public partial class CategoryForm : Form
     {
-        private 
+        private string username;
+        private string password;
         public CategoryForm()
         {
             InitializeComponent();

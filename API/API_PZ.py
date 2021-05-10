@@ -269,6 +269,13 @@ class QuizManager(Resource):
         else:
             return make_response(jsonify({ 'Message': 'BAD REQUEST' }), 400)
 
+####### Quiz Category ##############
+class QuizCategory(Resource):
+    
+    @staticmethod
+    def get():
+        return make_response(jsonify(getQuizCategoryNames()), 200)
+
 ####### Stats Manager ##############
 class StatsManager(Resource):
     
@@ -332,19 +339,18 @@ def getQuiz(category_name):
         result.append(tmpDict)
     return result
 
-####### Documentation ##############
-
-@app.route("/spec")
-def spec():
-    swag = swagger(app)
-    swag['info']['version'] = "1.0"
-    swag['info']['title'] = "My API"
-    return jsonify(swag)
+def getQuizCategoryNames():
+    quizzes = Quiz.query.all()
+    if quizzes != None:
+        return [quiz.category_name for quiz in quizzes]
+    else:
+        return "[]"
 
 ####### Resource Mapping ##############
 
 api.add_resource(UserManager, '/api/users')
 api.add_resource(QuizManager, '/api/quizzes')
+api.add_resource(QuizCategory, '/api/quizzes-categories')
 api.add_resource(StatsManager, '/api/stats')
 
 if __name__ == '__main__':

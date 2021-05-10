@@ -236,16 +236,19 @@ class UserManager(Resource):
             return make_response(jsonify({ 'Message': 'Must provide the user username' }), 400)
 
         user = User.query.filter_by(username = username).first()
-        stats = Stats.query.filter_by(userid = user.id).all()
 
         if user == None:
             return make_response(jsonify({ 'Message': 'User not exist!' }), 404)
 
+        stats = Stats.query.filter_by(userid = user.id).all()
+        
         db.session.delete(user)
         db.session.commit()
-        for s in stats:
-            db.session.delete(s)
-            db.session.commit()
+
+        if stats != None:
+            for s in stats:
+                db.session.delete(s)
+                db.session.commit()
 
         return make_response(jsonify({'Message': f'User {username} deleted.'}), 200)
 

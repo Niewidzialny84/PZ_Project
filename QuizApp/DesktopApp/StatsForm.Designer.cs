@@ -49,11 +49,11 @@ namespace DesktopApp
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(350, 30);
+            this.label1.Location = new System.Drawing.Point(342, 30);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 29);
+            this.label1.Size = new System.Drawing.Size(137, 29);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Your Stats";
+            this.label1.Text = "Twoje wyniki";
             // 
             // label2
             // 
@@ -63,17 +63,17 @@ namespace DesktopApp
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(107, 29);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Category ";
+            this.label2.Text = "Kategoria";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(388, 142);
+            this.label3.Location = new System.Drawing.Point(371, 142);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(136, 29);
+            this.label3.Size = new System.Drawing.Size(152, 29);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Total Points ";
+            this.label3.Text = "Łączne punkty";
             // 
             // label4
             // 
@@ -81,9 +81,9 @@ namespace DesktopApp
             this.label4.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label4.Location = new System.Drawing.Point(598, 142);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(158, 29);
+            this.label4.Size = new System.Drawing.Size(157, 29);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Average Points";
+            this.label4.Text = "Punkty średnio";
             // 
             // label5
             // 
@@ -111,9 +111,9 @@ namespace DesktopApp
             this.label7.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label7.Location = new System.Drawing.Point(31, 197);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(116, 29);
+            this.label7.Size = new System.Drawing.Size(122, 29);
             this.label7.TabIndex = 4;
-            this.label7.Text = "Category 1";
+            this.label7.Text = "Kategoria 1";
             // 
             // label8
             // 
@@ -141,9 +141,9 @@ namespace DesktopApp
             this.label10.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label10.Location = new System.Drawing.Point(31, 244);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(120, 29);
+            this.label10.Size = new System.Drawing.Size(126, 29);
             this.label10.TabIndex = 7;
-            this.label10.Text = "Category 2";
+            this.label10.Text = "Kategoria 2";
             // 
             // label11
             // 
@@ -171,9 +171,9 @@ namespace DesktopApp
             this.label13.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label13.Location = new System.Drawing.Point(31, 288);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(120, 29);
+            this.label13.Size = new System.Drawing.Size(126, 29);
             this.label13.TabIndex = 10;
-            this.label13.Text = "Category 3";
+            this.label13.Text = "Kategoria 3";
             // 
             // backButton
             // 
@@ -182,7 +182,7 @@ namespace DesktopApp
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(116, 34);
             this.backButton.TabIndex = 13;
-            this.backButton.Text = "Back";
+            this.backButton.Text = "Powrót";
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 

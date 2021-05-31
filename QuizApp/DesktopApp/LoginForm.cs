@@ -45,6 +45,9 @@ namespace DesktopApp
             return true;
         }
 
-        
+        private void top_lbl_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

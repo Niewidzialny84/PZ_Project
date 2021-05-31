@@ -43,7 +43,7 @@ namespace DesktopApp
             answeredQuestions = correctAnswers = 0;
             GetQuestions();
             correctAnswer=LoadQuestion();
-            numberLabel.Text = answeredQuestions+1 + " out of 10";
+            numberLabel.Text = answeredQuestions+1 + " z 10";
             
         }
 
@@ -69,7 +69,7 @@ namespace DesktopApp
                 }
                 catch (Exception e) { } 
             }
-            EndForm endForm = new EndForm(username,password,"Time is up!\n"+ "You answered "+ correctAnswers.ToString()+ " / 10 questions correctly!", correctAnswers,0.0);
+            EndForm endForm = new EndForm(username,password,"Czas się skończył!\n"+ "Odpowiedziałęś na "+ correctAnswers.ToString()+ " z 10 pytań poprawnie!", correctAnswers,0.0);
 
             try
             {
@@ -87,7 +87,7 @@ namespace DesktopApp
         }
         private void UpdateClock(string time)
         {
-            this.timeLabel.Text = "Time Remaining: " + time + " seconds";
+            this.timeLabel.Text = "Pozostały czas: " + time + " sekund";
         }
 
         private void aButton_Click(object sender, EventArgs e)
@@ -134,7 +134,7 @@ namespace DesktopApp
             button.Update();
             Thread.Sleep(20);
             Thread.Sleep(2000);
-            string timeLeft = timeLabel.Text.Replace("Time Remaining: ", "").Replace(" seconds","");
+            string timeLeft = timeLabel.Text.Replace("Pozostały czas: ", "").Replace(" sekund","");
             timer = Convert.ToDouble(timeLeft);
 
 
@@ -147,7 +147,7 @@ namespace DesktopApp
                  timeLeft = timeLabel.Text;
                 
                 //timerThread.Abort();
-                EndForm endForm = new EndForm(username,password,"You answered "+ correctAnswers.ToString()+ "/10 questions correctly!", correctAnswers,timer);
+                EndForm endForm = new EndForm(username,password,"Odpowiedziano na "+ correctAnswers.ToString()+ " z 10 pytań poprawnie!", correctAnswers,timer);
                 endForm.Show();
                 this.Close();
             }
@@ -184,9 +184,15 @@ namespace DesktopApp
             question = new Question("Dzik jest dziki, dzik jest... ", "zły", "duży", "fajny", "niefajny");
             questions.Add(question);
         }
+
+        private void timeLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private string LoadQuestion()
         {
-            numberLabel.Text = answeredQuestions+1 + " out of 10";
+            numberLabel.Text = answeredQuestions+1 + " z 10";
             Question question = questions[answeredQuestions];
             string[] answers = question.GetAnswers();
             string answer = answers[0];

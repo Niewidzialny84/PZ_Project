@@ -20,14 +20,14 @@ namespace DesktopApp
             InitializeComponent();
             this.username = "";
             this.password = "";
-            this.usernameLabel.Text = "Hello " + username;
+            this.usernameLabel.Text = "Witaj " + username;
         }
         public MainForm(string username,string password)
         {
             InitializeComponent();
             this.username = username;
             this.password = password;
-            this.usernameLabel.Text = "Hello " + username;
+            this.usernameLabel.Text = "Witaj " + username;
         }
         private void logoutButton_Click(object sender, EventArgs e)
         {
@@ -53,6 +53,11 @@ namespace DesktopApp
             RankingForm rankingForm = new RankingForm(username, password);
             rankingForm.Show();
             this.Close();
+        }
+
+        private void usernameLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

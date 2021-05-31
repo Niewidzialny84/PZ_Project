@@ -49,10 +49,14 @@ namespace DesktopApp
         private void EndForm_Load(object sender, EventArgs e)
         {
             this.messageLabel.Text = message;
-            this.timeLeft.Text = "Time left:\n" + time.ToString();
-            this.totalResult.Text = "Total result:\n" + countResult(correctQuestions,Convert.ToInt32(time)).ToString();
+            this.timeLeft.Text = "Pozostały czas:\n" + time.ToString();
+            this.totalResult.Text = "Uzyskane punkty:\n" + countResult(correctQuestions,Convert.ToInt32(time)).ToString();
         }
-        int countResult(int correctAnswers,int timeLeft) => (correctAnswers* 7 + 2 * (timeLeft / 5));    
-        
+        int countResult(int correctAnswers,int timeLeft) => (correctAnswers* 7 + 2 * (timeLeft / 5));
+
+        private void messageLabel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

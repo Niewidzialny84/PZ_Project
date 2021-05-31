@@ -56,9 +56,10 @@ namespace DesktopApp
             this.top_lbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(85)))), ((int)(((byte)(96)))));
             this.top_lbl.Location = new System.Drawing.Point(230, 54);
             this.top_lbl.Name = "top_lbl";
-            this.top_lbl.Size = new System.Drawing.Size(241, 33);
+            this.top_lbl.Size = new System.Drawing.Size(247, 33);
             this.top_lbl.TabIndex = 1;
-            this.top_lbl.Text = "Challange Your Mind";
+            this.top_lbl.Text = "Wyzwanie dla umysłu";
+            this.top_lbl.Click += new System.EventHandler(this.top_lbl_Click);
             // 
             // log_box
             // 
@@ -67,7 +68,7 @@ namespace DesktopApp
             this.log_box.ForeColor = System.Drawing.SystemColors.Window;
             this.log_box.Location = new System.Drawing.Point(258, 114);
             this.log_box.Name = "log_box";
-            this.log_box.PlaceholderText = "Username";
+            this.log_box.PlaceholderText = "Użytkownik";
             this.log_box.Size = new System.Drawing.Size(191, 34);
             this.log_box.TabIndex = 4;
             // 
@@ -78,7 +79,7 @@ namespace DesktopApp
             this.pass_box.ForeColor = System.Drawing.SystemColors.Window;
             this.pass_box.Location = new System.Drawing.Point(258, 154);
             this.pass_box.Name = "pass_box";
-            this.pass_box.PlaceholderText = "Password";
+            this.pass_box.PlaceholderText = "Hasło";
             this.pass_box.Size = new System.Drawing.Size(191, 34);
             this.pass_box.TabIndex = 5;
             this.pass_box.UseSystemPasswordChar = true;
@@ -93,7 +94,7 @@ namespace DesktopApp
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(191, 43);
             this.loginButton.TabIndex = 6;
-            this.loginButton.Text = "Login";
+            this.loginButton.Text = "Zaloguj";
             this.loginButton.UseVisualStyleBackColor = false;
             this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
             // 

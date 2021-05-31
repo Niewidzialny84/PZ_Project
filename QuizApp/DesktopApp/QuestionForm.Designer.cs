@@ -47,18 +47,18 @@ namespace DesktopApp
             this.questionLabel.Name = "questionLabel";
             this.questionLabel.Size = new System.Drawing.Size(654, 102);
             this.questionLabel.TabIndex = 0;
-            this.questionLabel.Text = "Question";
+            this.questionLabel.Text = "Pytanie";
             this.questionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // numberLabel
             // 
             this.numberLabel.AutoSize = true;
             this.numberLabel.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.numberLabel.Location = new System.Drawing.Point(658, -2);
+            this.numberLabel.Location = new System.Drawing.Point(721, -2);
             this.numberLabel.Name = "numberLabel";
-            this.numberLabel.Size = new System.Drawing.Size(116, 29);
+            this.numberLabel.Size = new System.Drawing.Size(67, 29);
             this.numberLabel.TabIndex = 1;
-            this.numberLabel.Text = "1 out of 10";
+            this.numberLabel.Text = "1 z 10";
             // 
             // resignButton
             // 
@@ -67,7 +67,7 @@ namespace DesktopApp
             this.resignButton.Name = "resignButton";
             this.resignButton.Size = new System.Drawing.Size(88, 36);
             this.resignButton.TabIndex = 2;
-            this.resignButton.Text = "Resign";
+            this.resignButton.Text = "Opuść";
             this.resignButton.UseVisualStyleBackColor = true;
             this.resignButton.Click += new System.EventHandler(this.resignButton_Click);
             // 
@@ -119,11 +119,12 @@ namespace DesktopApp
             // 
             this.timeLabel.AutoSize = true;
             this.timeLabel.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.timeLabel.Location = new System.Drawing.Point(523, 409);
+            this.timeLabel.Location = new System.Drawing.Point(537, 409);
             this.timeLabel.Name = "timeLabel";
-            this.timeLabel.Size = new System.Drawing.Size(265, 26);
+            this.timeLabel.Size = new System.Drawing.Size(251, 26);
             this.timeLabel.TabIndex = 7;
-            this.timeLabel.Text = "Time Remaining: 100 seconds";
+            this.timeLabel.Text = "Pozostały czas: 100 sekund";
+            this.timeLabel.Click += new System.EventHandler(this.timeLabel_Click);
             // 
             // QuestionForm
             // 

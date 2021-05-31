@@ -49,7 +49,7 @@ namespace DesktopApp
             this.catButton1.Name = "catButton1";
             this.catButton1.Size = new System.Drawing.Size(168, 41);
             this.catButton1.TabIndex = 0;
-            this.catButton1.Text = "Cat1";
+            this.catButton1.Text = "Kat1";
             this.catButton1.UseVisualStyleBackColor = true;
             this.catButton1.Click += new System.EventHandler(this.catButton1_Click);
             // 
@@ -57,11 +57,12 @@ namespace DesktopApp
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(254, 38);
+            this.label1.Location = new System.Drawing.Point(243, 39);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(200, 33);
+            this.label1.Size = new System.Drawing.Size(225, 33);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Choose Category";
+            this.label1.Text = "Wybierz Kategorię";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // button2
             // 
@@ -70,7 +71,7 @@ namespace DesktopApp
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(168, 41);
             this.button2.TabIndex = 2;
-            this.button2.Text = "Cat2";
+            this.button2.Text = "Kat2";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // button3
@@ -80,7 +81,7 @@ namespace DesktopApp
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(168, 41);
             this.button3.TabIndex = 3;
-            this.button3.Text = "Cat3";
+            this.button3.Text = "Kat3";
             this.button3.UseVisualStyleBackColor = true;
             // 
             // button4
@@ -90,7 +91,7 @@ namespace DesktopApp
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(168, 41);
             this.button4.TabIndex = 6;
-            this.button4.Text = "Cat6";
+            this.button4.Text = "Kat6";
             this.button4.UseVisualStyleBackColor = true;
             // 
             // button5
@@ -100,7 +101,7 @@ namespace DesktopApp
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(168, 41);
             this.button5.TabIndex = 5;
-            this.button5.Text = "Cat5";
+            this.button5.Text = "Kat5";
             this.button5.UseVisualStyleBackColor = true;
             // 
             // button6
@@ -110,7 +111,7 @@ namespace DesktopApp
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(168, 41);
             this.button6.TabIndex = 4;
-            this.button6.Text = "Cat4";
+            this.button6.Text = "Kat4";
             this.button6.UseVisualStyleBackColor = true;
             // 
             // button7
@@ -120,7 +121,7 @@ namespace DesktopApp
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(168, 41);
             this.button7.TabIndex = 9;
-            this.button7.Text = "Cat9";
+            this.button7.Text = "Kat9";
             this.button7.UseVisualStyleBackColor = true;
             // 
             // button8
@@ -130,7 +131,7 @@ namespace DesktopApp
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(168, 41);
             this.button8.TabIndex = 8;
-            this.button8.Text = "Cat8";
+            this.button8.Text = "Kat8";
             this.button8.UseVisualStyleBackColor = true;
             // 
             // button9
@@ -140,7 +141,7 @@ namespace DesktopApp
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(168, 41);
             this.button9.TabIndex = 7;
-            this.button9.Text = "Cat7";
+            this.button9.Text = "Kat7";
             this.button9.UseVisualStyleBackColor = true;
             // 
             // backButton
@@ -150,7 +151,7 @@ namespace DesktopApp
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(168, 41);
             this.backButton.TabIndex = 10;
-            this.backButton.Text = "Back";
+            this.backButton.Text = "Powrót";
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 

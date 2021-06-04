@@ -1,7 +1,7 @@
 from logger import Logger
 from protocol import Header,HeaderParser,Protocol
 
-import requests, json, socket
+import requests, json, socket, hashlib, os
 
 class URL(object):
     local = 'http://127.0.0.1:5000/api/'
@@ -47,7 +47,7 @@ class User(object):
                 h,p = Protocol.encode(Header.ERR, msg = 'Invalid login data')
                 Logger.log('User login invalid data '+ str(self.address))           
             elif headerType == Header.REG:
-                r = requests.post(URL.local+'users', data=json.dumps({'username':data['login'], self.passwordHash(data['password']).hex()}))
+                r = requests.post(URL.local+'users', data=json.dumps({'username':data['login'], 'password':self.passwordHash(data['password']).hex()}))
                 if r.status_code == 201:
                     h,p = Protocol.encode(Header.ACK, msg = 'Created Account')
                     Logger.log('User registered ')

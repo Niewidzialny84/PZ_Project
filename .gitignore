@@ -80,6 +80,7 @@ target/
 # IPython
 profile_default/
 ipython_config.py
+settings.json
 
 # pyenv
 .python-version
@@ -127,3 +128,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.vs/
+.vscode/
+*.code-workspace

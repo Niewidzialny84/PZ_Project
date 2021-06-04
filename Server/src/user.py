@@ -92,7 +92,17 @@ class UserLogged(User):
             h,p = None,None
 
             if headerType == Header.DIS:
-                raise socket.error('Disconnect')     
+                raise socket.error('Disconnect')   
+            elif headerType == Header.ALI:
+                r = requests.get(URL.local+'category')
+
+                if r.status_code == 200:
+                    j = r.json()
+                    category = j['categories']
+                    h,p = Protocol.encode(Header.LIS, category=category)
+                    Logger.log('Category request')
+                else:
+                    Logger.log('Category request failed')
 
             if h != None and p != None:
                 self.transfer(h,p)

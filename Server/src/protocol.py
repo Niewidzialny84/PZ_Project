@@ -14,11 +14,12 @@ class Header(Enum):
     SES = 4 #Session 
     REG = 5 #Register 
     LIS = 6 #Get Quiz list
-    QUI = 7 #Selected/Begin Quiz
-    QUE = 8 #Quiz question
-    NXT = 9 #Question ask
-    END = 10 #Quiz End
-    STA = 11 #Personal Stats
+    ALI = 7 #List request
+    QUI = 8 #Selected/Begin Quiz
+    QUE = 9 #Quiz question
+    NXT = 10 #Question ask
+    END = 11 #Quiz End
+    STA = 12 #Personal Stats
 
     '''
     | Version  | Type   | Payload Size |
@@ -70,7 +71,7 @@ class Protocol(object):
         login = kwargs.get('login',None)
         password = kwargs.get('password',None)
 
-        if headerType == Header.ACK or headerType == Header.ERR or headerType == Header.DIS:
+        if headerType == Header.ACK or headerType == Header.ERR or headerType == Header.DIS or headerType == Header.NXT or headerType == Header.ALI :
             data = {'msg': msg}
         elif headerType == Header.LOG:
             if login != None or password != None:
@@ -110,8 +111,6 @@ class Protocol(object):
                 data = {'question':question,'a1':a1,'a2':a2,'a3':a3,'correct':correct}
             else:
                 raise TypeError('-QUE- Missing data')
-        elif headerType == Header.NXT:
-            data = {'msg':msg}
         elif headerType == Header.END:
             score = kwargs.get('score',None)
             if score != None:

@@ -1,4 +1,4 @@
-import socket, threading, ssl
+import socket, threading
 import os
 
 from user import User, UserLogged
@@ -46,11 +46,6 @@ class Server(object):
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.sock.bind((ip,port))
 
-        self.context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-        self.context.options |= ssl.OP_NO_TLSv1 | ssl.OP_NO_TLSv1_1
-        self.context.set_ciphers('AES256+ECDH:AES256+EDH')
-        self.context.load_cert_chain(certfile=str(os.path.dirname(os.path.abspath(__file__))+'/cert.pem'))
-
         self.innerAddr = self.sock.getsockname()
 
         self.running = True
@@ -59,18 +54,14 @@ class Server(object):
     
     def run(self):
         self.sock.listen(100)
-        self.context
 
         Logger.log("Running on: "+ str(self.sock.getsockname()))
 
         while self.running:
             try:
                 c, addr = self.sock.accept()
-                #Logger.log('Connection from: '+str(addr))
 
-                wrap = self.context.wrap_socket(c,server_side=True)
-
-                user = User(wrap,addr) 
+                user = User(c,addr) 
                 self.users.add(user)
 
                 threading.Thread(target=self.userHandler, args=(user,)).start()

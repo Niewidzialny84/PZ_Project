@@ -74,14 +74,6 @@ class UserLogged(User):
         self.uuid = user.uuid
         self.dbID = dbID
         self.username = username
-        r = requests.get(URL.local+'users')
-        
-        l = []
-        for x in r.json():
-            if x['username'] != self.username:
-                l.append(x['username'])
-        h,p = Protocol.encode(Header.LIS, users = l)
-        self.transfer(h,p)
 
     def __repr__(self):
         return str(self.address)+' '+str(self.uuid)+' '+self.username

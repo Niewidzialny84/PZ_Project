@@ -35,8 +35,10 @@ class User(object):
                 r = requests.get(URL.local+'users', params={'username':data['login']})
                 j = r.json()
                 if r.status_code == 200 and j != {}:
-                    #TODO handle password encoding
-                    if data['password'] == j['password']:
+                    u2 = bytes.fromhex(j['password'])
+                    u1 = self.passwordHash(data['password'], u2[:32])
+
+                    if u1[32:] == u2[32:]:
                         h,p = Protocol.encode(Header.SES, session = self.uuid)
                         self.transfer(h,p)
                         Logger.log('User logged in ('+str(data['login'])+')')
@@ -45,7 +47,7 @@ class User(object):
                 h,p = Protocol.encode(Header.ERR, msg = 'Invalid login data')
                 Logger.log('User login invalid data '+ str(self.address))           
             elif headerType == Header.REG:
-                r = requests.post(URL.local+'users', data=json.dumps({'username':data['login'], 'password': data['password']}))
+                r = requests.post(URL.local+'users', data=json.dumps({'username':data['login'], self.passwordHash(data['password']).hex()}))
                 if r.status_code == 201:
                     h,p = Protocol.encode(Header.ACK, msg = 'Created Account')
                     Logger.log('User registered ')
@@ -67,6 +69,10 @@ class User(object):
         self.socket.send(h)
         self.socket.send(p)
 
+    def passwordHash(self, password: str, salt=None):
+        salt = salt or os.urandom(32)
+        key = hashlib.pbkdf2_hmac('sha256',password.encode(),salt,10000)
+        return (salt+key)
 
 class UserLogged(User):
     def __init__(self, user: User, dbID, username):

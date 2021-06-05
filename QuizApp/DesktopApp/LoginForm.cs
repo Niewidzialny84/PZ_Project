@@ -36,6 +36,7 @@ namespace DesktopApp
                 MainForm mainForm = new MainForm(log_box.Text, pass_box.Text);
                 this.Hide();
                 mainForm.Show();
+                //
             }
         }
        //OBSŁUGA LOGOWANIA 

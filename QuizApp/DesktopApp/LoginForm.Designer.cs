@@ -59,7 +59,7 @@ namespace DesktopApp
             this.top_lbl.Size = new System.Drawing.Size(247, 33);
             this.top_lbl.TabIndex = 1;
             this.top_lbl.Text = "Wyzwanie dla umysłu";
-            this.top_lbl.Click += new System.EventHandler(this.top_lbl_Click);
+          
             // 
             // log_box
             // 

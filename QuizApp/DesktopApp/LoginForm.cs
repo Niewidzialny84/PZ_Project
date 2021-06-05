@@ -38,17 +38,30 @@ namespace DesktopApp
                 mainForm.Show();
                 //
             }
+            else
+            {
+                MessageBox.Show("Login unsuccessful");
+            }
         }
        //OBSŁUGA LOGOWANIA 
         private bool login(string username, string password)
         {
+            
+            QuizClient quizClient = new QuizClient("127.0.0.1", 7777);
+            quizClient.username = username;
+            var stream =quizClient.Start();
 
-            return true;
+            if(quizClient.Login(password,stream))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+           
         }
 
-        private void top_lbl_Click(object sender, EventArgs e)
-        {
-
-        }
+ 
     }
 }

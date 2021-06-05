@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Sockets;
 
 namespace DesktopApp
 {
@@ -16,18 +17,18 @@ namespace DesktopApp
         {
             InitializeComponent();
         }
-        private string username;
-        private string password;
-        public RankingForm(string username, string password)
+        User user;
+        NetworkStream stream;
+        public RankingForm(User user, NetworkStream stream)
         {
-            this.username = username;
-            this.password = password;
+            this.user = user;
+            this.stream = stream;
             InitializeComponent();
         }
 
         private void backButton_Click(object sender, EventArgs e)
         {
-            MainForm mainForm = new MainForm(username, password);
+            MainForm mainForm = new MainForm(user,stream);
             mainForm.Show();
             this.Close();
         }

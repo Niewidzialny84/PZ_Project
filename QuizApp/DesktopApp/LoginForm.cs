@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Sockets;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 
@@ -17,7 +18,7 @@ namespace DesktopApp
         {
             InitializeComponent();
         }
-
+        NetworkStream stream;
         private void LoginForm_Paint(object sender, PaintEventArgs e)
         {
             Graphics gradientg = e.Graphics;
@@ -33,7 +34,7 @@ namespace DesktopApp
         {
             if (login(log_box.Text,pass_box.Text))
             {
-                MainForm mainForm = new MainForm(log_box.Text, pass_box.Text);
+                MainForm mainForm = new MainForm(new User(log_box.Text,pass_box.Text),stream);
                 this.Hide();
                 mainForm.Show();
                 //
@@ -49,7 +50,7 @@ namespace DesktopApp
             
             QuizClient quizClient = new QuizClient("127.0.0.1", 7777);
             quizClient.username = username;
-            var stream =quizClient.Start();
+            stream =quizClient.Start();
 
             if(quizClient.Login(password,stream))
             {

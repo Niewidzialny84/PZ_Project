@@ -7,27 +7,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Sockets;
 
 namespace DesktopApp
 {
     public partial class CategoryForm : Form
     {
-        private string username;
-        private string password;
+
+        private User user;
+        NetworkStream stream;
         public CategoryForm()
         {
             InitializeComponent();
         }
-        public CategoryForm(string username, string password)
+        public CategoryForm(User user, NetworkStream stream)
         {
-            this.username = username;
-            this.password = password;
+            this.user = user;
+            this.stream = stream;
             InitializeComponent();
         }
 
         private void catButton1_Click(object sender, EventArgs e)
         {
-            QuestionForm questionForm = new QuestionForm(username, password);
+            QuestionForm questionForm = new QuestionForm(user,stream);
             questionForm.Show();
             this.Close();
            
@@ -35,7 +37,7 @@ namespace DesktopApp
 
         private void backButton_Click(object sender, EventArgs e)
         {
-            MainForm mainForm = new MainForm(username, password);
+            MainForm mainForm = new MainForm(user,stream);
             mainForm.Show();
             this.Close();
         }

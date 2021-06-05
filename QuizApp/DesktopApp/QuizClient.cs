@@ -61,14 +61,18 @@ namespace DesktopApp
             {
                 return false;
             }
-            
-
-
-                                            
-
-            //string receive = Encoding.ASCII.GetString(buffer).Trim(trim);
-           
-
+        }
+        static public void Disconnect(NetworkStream stream)
+        {
+            string msg = "{\"msg\":\"Disconnect\"}";
+            var byData = Encoding.UTF8.GetBytes(msg);
+            var bytes = HeaderParser.Encode(Header.DIS, Convert.ToUInt32(byData.Length));
+            stream.Write(bytes, 0, bytes.Length);
+            try
+            {
+                stream.Write(byData, 0, byData.Length);
+            }
+            catch(System.IO.IOException e){}
         }
     }
 }

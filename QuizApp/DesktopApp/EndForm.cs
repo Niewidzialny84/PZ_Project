@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,31 +18,30 @@ namespace DesktopApp
         {
             InitializeComponent();
         }
-        private string username;
-        private string password;
+        private User user;
         private string message;
         private int correctQuestions;
         private double time;
-        public EndForm(string username, string password)
+        NetworkStream stream;
+        public EndForm(User user, NetworkStream stream)
         {
-            this.username = username;
-            this.password = password;
+            this.user = user;
             InitializeComponent();
         }
-        public EndForm(string username, string password, string message, int correctQuestions, double timeleft)
+        public EndForm(User user, string message, int correctQuestions, double timeleft, NetworkStream stream)
         {
             this.message = message;
-            this.username = username;
-            this.password = password;
+            this.user = user;
             this.correctQuestions = correctQuestions;
             this.time=timeleft;
+            this.stream = stream;
            
             InitializeComponent();
         }
 
         private void menuButton_Click(object sender, EventArgs e)
         {
-            MainForm mainForm = new MainForm(username, password);
+            MainForm mainForm = new MainForm(user,stream);
             this.Close() ;
             mainForm.Show();
         }

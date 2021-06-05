@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
-
+using System.Net.Sockets;
 
 namespace DesktopApp
 {
@@ -20,20 +20,20 @@ namespace DesktopApp
 
         }
         List<Question> questions = new List<Question>();
-        
-        private string username;
-        private string password;
+
+        User user;
         private string correctAnswer;
+        NetworkStream stream;
         ThreadStart timerThreadStart;
         Thread timerThread;
         int answeredQuestions, correctAnswers;
         double timer = 100.0;
         //
         public delegate void delUpdateUITextBox(string text);
-        public QuestionForm(string username, string password)
+        public QuestionForm(User user,NetworkStream stream)
         {
-            this.username = username;
-            this.password = password;
+            this.user = user;
+            this.stream = stream;
             InitializeComponent();
             timerThreadStart = new ThreadStart(CountDown);
          
@@ -50,7 +50,7 @@ namespace DesktopApp
         private void resignButton_Click(object sender, EventArgs e)
         {
             timer = 0.0;
-            MainForm mainForm = new MainForm(username, password);
+            MainForm mainForm = new MainForm(user,stream);
             
             mainForm.Show();
             this.Close();
@@ -69,7 +69,7 @@ namespace DesktopApp
                 }
                 catch (Exception e) { } 
             }
-            EndForm endForm = new EndForm(username,password,"Czas się skończył!\n"+ "Odpowiedziałęś na "+ correctAnswers.ToString()+ " z 10 pytań poprawnie!", correctAnswers,0.0);
+            EndForm endForm = new EndForm(user,"Czas się skończył!\n"+ "Odpowiedziałęś na "+ correctAnswers.ToString()+ " z 10 pytań poprawnie!", correctAnswers,0.0,stream);
 
             try
             {
@@ -147,7 +147,7 @@ namespace DesktopApp
                  timeLeft = timeLabel.Text;
                 
                 //timerThread.Abort();
-                EndForm endForm = new EndForm(username,password,"Odpowiedziano na "+ correctAnswers.ToString()+ " z 10 pytań poprawnie!", correctAnswers,timer);
+                EndForm endForm = new EndForm(user,"Odpowiedziano na "+ correctAnswers.ToString()+ " z 10 pytań poprawnie!", correctAnswers,timer,stream);
                 endForm.Show();
                 this.Close();
             }

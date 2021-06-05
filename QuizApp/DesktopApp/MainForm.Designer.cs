@@ -106,6 +106,7 @@ namespace DesktopApp
             this.Controls.Add(this.usernameLabel);
             this.Name = "MainForm";
             this.Text = "MainForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Disconnect);
             this.ResumeLayout(false);
             this.PerformLayout();
 

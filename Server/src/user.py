@@ -1,7 +1,7 @@
 from logger import Logger
 from protocol import Header,HeaderParser,Protocol
 
-import requests, json, socket
+import requests, json, socket, hashlib, os
 
 class URL(object):
     local = 'http://127.0.0.1:5000/api/'
@@ -35,8 +35,10 @@ class User(object):
                 r = requests.get(URL.local+'users', params={'username':data['login']})
                 j = r.json()
                 if r.status_code == 200 and j != {}:
-                    #TODO handle password encoding
-                    if data['password'] == j['password']:
+                    u2 = bytes.fromhex(j['password'])
+                    u1 = self.passwordHash(data['password'], u2[:32])
+
+                    if u1[32:] == u2[32:]:
                         h,p = Protocol.encode(Header.SES, session = self.uuid)
                         self.transfer(h,p)
                         Logger.log('User logged in ('+str(data['login'])+')')
@@ -45,7 +47,7 @@ class User(object):
                 h,p = Protocol.encode(Header.ERR, msg = 'Invalid login data')
                 Logger.log('User login invalid data '+ str(self.address))           
             elif headerType == Header.REG:
-                r = requests.post(URL.local+'users', data=json.dumps({'username':data['login'], 'password': data['password']}))
+                r = requests.post(URL.local+'users', json={'username':data['login'], 'password':self.passwordHash(data['password']).hex()})
                 if r.status_code == 201:
                     h,p = Protocol.encode(Header.ACK, msg = 'Created Account')
                     Logger.log('User registered ')
@@ -67,6 +69,10 @@ class User(object):
         self.socket.send(h)
         self.socket.send(p)
 
+    def passwordHash(self, password: str, salt=None):
+        salt = salt or os.urandom(32)
+        key = hashlib.pbkdf2_hmac('sha256',password.encode(),salt,10000)
+        return (salt+key)
 
 class UserLogged(User):
     def __init__(self, user: User, dbID, username):
@@ -74,14 +80,6 @@ class UserLogged(User):
         self.uuid = user.uuid
         self.dbID = dbID
         self.username = username
-        r = requests.get(URL.local+'users')
-        
-        l = []
-        for x in r.json():
-            if x['username'] != self.username:
-                l.append(x['username'])
-        h,p = Protocol.encode(Header.LIS, users = l)
-        self.transfer(h,p)
 
     def __repr__(self):
         return str(self.address)+' '+str(self.uuid)+' '+self.username
@@ -94,7 +92,17 @@ class UserLogged(User):
             h,p = None,None
 
             if headerType == Header.DIS:
-                raise socket.error('Disconnect')     
+                raise socket.error('Disconnect')   
+            elif headerType == Header.ALI:
+                r = requests.get(URL.local+'category')
+
+                if r.status_code == 200:
+                    j = r.json()
+                    category = j['categories']
+                    h,p = Protocol.encode(Header.LIS, category=category)
+                    Logger.log('Category request')
+                else:
+                    Logger.log('Category request failed')
 
             if h != None and p != None:
                 self.transfer(h,p)

@@ -10,11 +10,16 @@ class Header(Enum):
     ACK = 0 #Acknowledment 
     ERR = 1 #Any type error 
     DIS = 2 #Disconnection 
-    MSG = 3 #TODO: Message 
-    LOG = 4 #TODO:Login 
-    SES = 5 #TODO:Session 
-    REG = 6 #TODO:Register 
-
+    LOG = 3 #Login 
+    SES = 4 #Session 
+    REG = 5 #Register 
+    LIS = 6 #Get Quiz list
+    ALI = 7 #List request
+    QUI = 8 #Selected/Begin Quiz
+    QUE = 9 #Quiz question
+    NXT = 10 #Question ask
+    END = 11 #Quiz End
+    STA = 12 #Personal Stats
 
     '''
     | Version  | Type   | Payload Size |
@@ -66,7 +71,7 @@ class Protocol(object):
         login = kwargs.get('login',None)
         password = kwargs.get('password',None)
 
-        if headerType == Header.ACK or headerType == Header.ERR or headerType == Header.DIS:
+        if headerType == Header.ACK or headerType == Header.ERR or headerType == Header.DIS or headerType == Header.NXT or headerType == Header.ALI :
             data = {'msg': msg}
         elif headerType == Header.LOG:
             if login != None or password != None:
@@ -84,7 +89,41 @@ class Protocol(object):
                 data = {'session': session}
             else:
                 raise TypeError('-SES- Missiong session id')       
-        
+        elif headerType == Header.LIS:
+            quizes = kwargs.get('quizes',[])
+            if quizes != None:
+                data = {'quizes': quizes}
+            else:
+                raise TypeError('-LIS- Missing quiz')
+        elif headerType == Header.QUI:
+            category = kwargs.get('category',None)
+            if category != None:
+                data = {'category': category}
+            else:
+                raise TypeError('-QUI- Missing category')
+        elif headerType == Header.QUE:
+            question = kwargs.get('question',None)
+            a1 = kwargs.get('a1',None)
+            a2 = kwargs.get('a2',None)
+            a3 = kwargs.get('a3',None)
+            correct = kwargs.get('correct',None)
+            if question != None and a1 != None and a2 != None and a3 != None and correct != None:
+                data = {'question':question,'a1':a1,'a2':a2,'a3':a3,'correct':correct}
+            else:
+                raise TypeError('-QUE- Missing data')
+        elif headerType == Header.END:
+            score = kwargs.get('score',None)
+            if score != None:
+                data = {'score':score}
+            else:
+                raise TypeError('-END- Missing score')
+        elif headerType == Header.STA:
+            stats = kwargs.get('stats', {})
+            if stats != {}:
+                data = {'stats':stats}
+            else:
+                raise TypeError('STA Missing stats')
+
         encodedData = json.dumps(data).encode()
         header = HeaderParser.encode(headerType,len(encodedData))
 

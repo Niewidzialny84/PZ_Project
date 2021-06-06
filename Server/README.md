@@ -106,7 +106,7 @@ Bytes inside are encoded json documents which after decoding can contain specifi
     </tr>
     <tr>
         <td>QUE</td>
-        <td><code>question: str</code><code>a1: str</code><code>a2: str</code><code>a3: str</code><code>a4: str</code><code>correct: str</code></td>
+        <td><code>question: str</code><code>answers: list</code><code>correct: str</code></td>
         <td></td>
         <td>Single question from a quiz</td>
     </tr>

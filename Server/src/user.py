@@ -146,11 +146,14 @@ class UserLogged(User):
                             if y['id'] == x['Question']['correct_answer']:
                                 cor = y['answer']
                         
-                        qq.append(Question(q,a[0]['answer'],a[1]['answer'],a[2]['answer'],a[3]['answer'],cor))
+                        b = []
+                        for i in range(4):
+                            b.append(str(a[i]['answer']))
+                        qq.append(Question(q,b,str(cor)))
 
                     self.quiz = Quiz(qq,j[0]['Question']['quizid'])
                     question = self.quiz.next()
-                    h,p = Protocol.encode(Header.QUE, question=question.question,a1=question.a1,a2=question.a2,a3=question.a3,a4=question.a4,correct=question.correct)
+                    h,p = Protocol.encode(Header.QUE, question=question.question,answers=question.answers,correct=question.correct)
                     Logger.log('Quiz begin'+str(self.dbID))
                 else:
                     h,p = Protocol.encode(Header.ERR, msg='Cant begin quiz')
@@ -158,7 +161,7 @@ class UserLogged(User):
             elif headerType == Header.NXT:
                 if self.quiz != None:
                     question = self.quiz.next()
-                    h,p = Protocol.encode(Header.QUE, question=question.question,a1=question.a1,a2=question.a2,a3=question.a3,a4=question.a4,correct=question.correct)
+                    h,p = Protocol.encode(Header.QUE, question=question.question,answers=question.answers,correct=question.correct)
                     Logger.log('Quiz request fail '+str(self.dbID))
                 else:
                     h,p = Protocol.encode(Header.ERR, msg='Invalid request')

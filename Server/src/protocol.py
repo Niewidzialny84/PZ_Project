@@ -104,13 +104,10 @@ class Protocol(object):
                 raise TypeError('-QUI- Missing category')
         elif headerType == Header.QUE:
             question = kwargs.get('question',None)
-            a1 = kwargs.get('a1',None)
-            a2 = kwargs.get('a2',None)
-            a3 = kwargs.get('a3',None)
-            a4 = kwargs.get('a4',None)
+            answers = kwargs.get('answers',[])
             correct = kwargs.get('correct',None)
-            if question != None and a1 != None and a2 != None and a3 != None and a4 != None and correct != None:
-                data = {'question':question,'a1':a1,'a2':a2,'a3':a3,'a4':a4,'correct':correct}
+            if question != None and answers != [] and correct != None:
+                data = {'question':question,'answers':answers,'correct':correct}
             else:
                 raise TypeError('-QUE- Missing data')
         elif headerType == Header.END:

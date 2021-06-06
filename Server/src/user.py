@@ -94,15 +94,42 @@ class UserLogged(User):
             if headerType == Header.DIS:
                 raise socket.error('Disconnect')   
             elif headerType == Header.ALI:
-                r = requests.get(URL.local+'category')
+                r = requests.get(URL.local+'quizzes-categories')
 
                 if r.status_code == 200:
                     j = r.json()
-                    category = j['categories']
-                    h,p = Protocol.encode(Header.LIS, category=category)
+                    l = []
+                    for x in j:
+                        l.append(x['category_name'])
+                    h,p = Protocol.encode(Header.LIS, quizes=l)
                     Logger.log('Category request')
                 else:
                     Logger.log('Category request failed')
+            elif headerType == Header.STR:
+                r = requests.get(URL.local+'quizzes-categories')
+                r2 = requests.get(URL.local+'stats', params={'userid':self.dbID})
+
+                if r.status_code == 200 and r2.status_code == 200:
+                    cat = r.json()
+                    stat = r2.json()
+
+                    print(stat)
+                    ret = []
+                    for x in stat:
+                        for y in cat:
+                            if x['quizid'] == y['id']:
+                                print('abc')
+                                ret.append({'category:':y['category_name'], 'score': x['score']})
+                                break
+                    
+                    if ret != []:
+                        h,p = Protocol.encode(Header.STA, stats=ret)
+                    else:
+                        h,p = Protocol.encode(Header.ERR,msg='empty')
+                    Logger.log('Stats request '+str(self.dbID))
+                else:
+                    Logger.log('Stats request failed'+str(self.dbID))
+
 
             if h != None and p != None:
                 self.transfer(h,p)

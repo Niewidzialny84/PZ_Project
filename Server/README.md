@@ -43,8 +43,6 @@ It is made up from the converted to bytes data before sending.
 ### Data
 Bytes inside are encoded json documents which after decoding can contain specific fields based on the header type value. The header types and values are describled by the table below:
 
-`More comunicates will be added later`
-
 <table>
     <tr>
         <th>Header Type</th>
@@ -87,5 +85,53 @@ Bytes inside are encoded json documents which after decoding can contain specifi
         <td><code>login: str</code><br><code>password: str</code><br><code>email: str</code></td>
         <td></td>
         <td>Register data for creating new accounts</td>
+    </tr>
+    <tr>
+        <td>LIS</td>
+        <td><code>quizes: list</code></td>
+        <td></td>
+        <td>Returns list of avaible quizes</td>
+    </tr>
+    <tr>
+        <td>ALI</td>
+        <td></td>
+        <td><code>msg: str</code></td>
+        <td>Request for quiz list</td>
+    </tr>
+    <tr>
+        <td>QUI</td>
+        <td><code>category: str</code></td>
+        <td></td>
+        <td>Begin quiz request based on category</td>
+    </tr>
+    <tr>
+        <td>QUE</td>
+        <td><code>question: str</code><code>a1: str</code><code>a2: str</code><code>a3: str</code><code>a4: str</code><code>correct: str</code></td>
+        <td></td>
+        <td>Single question from a quiz</td>
+    </tr>
+    <tr>
+        <td>NXT</td>
+        <td></td>
+        <td><code>msg: str</code></td>
+        <td>Request for next question</td>
+    </tr>
+    <tr>
+        <td>END</td>
+        <td><code>score: int</code></td>
+        <td></td>
+        <td>Ending request for quiz with score</td>
+    </tr>
+    <tr>
+        <td>STA</td>
+        <td><code>stats: list of dicts</code></td>
+        <td></td>
+        <td>List of personal stats in pairs e.g<code>{"category": str, "score": int}</code></td>
+    </tr>
+    <tr>
+        <td>STR</td>
+        <td><code>msg: str</code></td>
+        <td></td>
+        <td>Request for personal stats</td>
     </tr>
 </table>

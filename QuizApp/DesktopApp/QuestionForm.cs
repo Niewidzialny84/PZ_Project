@@ -35,17 +35,19 @@ namespace DesktopApp
         {
             this.user = user;
             this.stream = stream;
+            this.category = category;
+
             InitializeComponent();
             timerThreadStart = new ThreadStart(CountDown);
-         
             timerThread = new Thread(timerThreadStart);
             timerThread.Start();
             timerThread.IsBackground = true;
+            
             answeredQuestions = correctAnswers = 0;
             GetQuestions();
             correctAnswer=LoadQuestion();
             numberLabel.Text = answeredQuestions+1 + " z 10";
-            this.category = category;
+            
         }
 
         private void resignButton_Click(object sender, EventArgs e)
@@ -68,7 +70,9 @@ namespace DesktopApp
                     delUpdateUITextBox DelUpdateUITextBox = new delUpdateUITextBox(UpdateClock);
                     this.timeLabel.BeginInvoke(DelUpdateUITextBox, Math.Round(timer, 1).ToString());
                 }
-                catch (Exception e) { } 
+                catch (Exception e) {
+                    break;
+                } 
             }
             EndForm endForm = new EndForm(user,"Czas się skończył!\n"+ "Odpowiedziałęś na "+ correctAnswers.ToString()+ " z 10 pytań poprawnie!", correctAnswers,0.0,stream);
 

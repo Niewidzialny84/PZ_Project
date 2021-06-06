@@ -22,6 +22,7 @@ namespace DesktopApp
         private string message;
         private int correctQuestions;
         private double time;
+        int points;
         NetworkStream stream;
         public EndForm(User user, NetworkStream stream)
         {
@@ -35,7 +36,9 @@ namespace DesktopApp
             this.correctQuestions = correctQuestions;
             this.time=timeleft;
             this.stream = stream;
+            points = countResult(correctQuestions, Convert.ToInt32(time));
            
+
             InitializeComponent();
         }
 
@@ -50,7 +53,11 @@ namespace DesktopApp
         {
             this.messageLabel.Text = message;
             this.timeLeft.Text = "Pozostały czas:\n" + time.ToString();
-            this.totalResult.Text = "Uzyskane punkty:\n" + countResult(correctQuestions,Convert.ToInt32(time)).ToString();
+            this.totalResult.Text = "Uzyskane punkty:\n" + points.ToString();
+            if (!QuizClient.SendPoints(stream, points))
+            {
+                MessageBox.Show("Nie udało się zsynchronizować wyników z serwerem");
+            }
         }
         int countResult(int correctAnswers,int timeLeft) => (correctAnswers* 7 + 2 * (timeLeft / 5));
 

@@ -11,7 +11,7 @@ namespace DesktopApp
         public string question { get; set; }
         public string[] answers { get; set; }
         public string correct { get; set; }
-        public Question(string question, string A, string B, string C, string D)
+        /*public Question(string question, string A, string B, string C, string D)
         {
             this.answers = new string[4];
             this.answers[0] = A;
@@ -19,7 +19,7 @@ namespace DesktopApp
             this.answers[2] = C;
             this.answers[3] = D;
             this.question = question;
-        }
+        }*/
 
 
         public string[] GetAnswers()

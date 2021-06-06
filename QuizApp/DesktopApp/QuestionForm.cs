@@ -28,9 +28,10 @@ namespace DesktopApp
         Thread timerThread;
         int answeredQuestions, correctAnswers;
         double timer = 100.0;
+        string category = "";
         //
         public delegate void delUpdateUITextBox(string text);
-        public QuestionForm(User user,NetworkStream stream)
+        public QuestionForm(User user,NetworkStream stream, string category)
         {
             this.user = user;
             this.stream = stream;
@@ -44,7 +45,7 @@ namespace DesktopApp
             GetQuestions();
             correctAnswer=LoadQuestion();
             numberLabel.Text = answeredQuestions+1 + " z 10";
-            
+            this.category = category;
         }
 
         private void resignButton_Click(object sender, EventArgs e)
@@ -161,8 +162,9 @@ namespace DesktopApp
         }
         private void GetQuestions()
         {
+
             questions.Clear();
-            Question question = new Question("Ile mam rąk", "2", "3", "4", "5");
+            /*Question question = new Question("Ile mam rąk", "2", "3", "4", "5");
             questions.Add(question);
             question = new Question("Ile mam włosów", "Duuuużo", "3", "4", "5");
             questions.Add(question);
@@ -182,7 +184,18 @@ namespace DesktopApp
             question = new Question("Ile mam kolan", "2", "3", "4", "5");
             questions.Add(question);
             question = new Question("Dzik jest dziki, dzik jest... ", "zły", "duży", "fajny", "niefajny");
-            questions.Add(question);
+            questions.Add(question);*/
+            for(int i=0;i<10;i++)
+            {
+                if(i==0)
+                {
+                    questions.Add(QuizClient.GetQuestion(stream, category,0));
+                }
+                else
+                {             
+                    questions.Add(QuizClient.GetQuestion(stream, category, 1));
+                }
+            }
         }
 
         private void timeLabel_Click(object sender, EventArgs e)
@@ -195,7 +208,8 @@ namespace DesktopApp
             numberLabel.Text = answeredQuestions+1 + " z 10";
             Question question = questions[answeredQuestions];
             string[] answers = question.GetAnswers();
-            string answer = answers[0];
+            //ODPOWIEDŹ
+            string answer = question.correct;
             Random rnd = new Random();
             answers = answers.OrderBy(x => rnd.Next()).ToArray();
             questionLabel.Text = question.GetQuestion();

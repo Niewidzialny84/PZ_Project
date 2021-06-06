@@ -61,12 +61,47 @@ namespace DesktopApp
         }
         private void catButton1_Click(object sender, EventArgs e)
         {
-            QuestionForm questionForm = new QuestionForm(user,stream);
+            goToQuestions(catButton1.Text);
+        }
+        private void catButton2_Click(object sender, EventArgs e)
+        {
+            goToQuestions(catButton2.Text);
+        }
+        private void catButton3_Click(object sender, EventArgs e)
+        {
+            goToQuestions(catButton3.Text);
+        }
+        private void catButton4_Click(object sender, EventArgs e)
+        {
+            goToQuestions(catButton4.Text);
+        }
+        private void catButton5_Click(object sender, EventArgs e)
+        {
+            goToQuestions(catButton5.Text);
+        }
+        private void catButton6_Click(object sender, EventArgs e)
+        {
+            goToQuestions(catButton6.Text);
+        }
+        private void catButton7_Click(object sender, EventArgs e)
+        {
+            goToQuestions(catButton7.Text);
+        }
+        private void catButton8_Click(object sender, EventArgs e)
+        {
+            goToQuestions(catButton8.Text);
+        }
+        private void catButton9_Click(object sender, EventArgs e)
+        {
+            goToQuestions(catButton9.Text);
+        }
+        private void goToQuestions(string category)
+        {
+            QuestionForm questionForm = new QuestionForm(user, stream,category);
             questionForm.Show();
             this.Close();
-           
-        }
 
+        }
         private void backButton_Click(object sender, EventArgs e)
         {
             MainForm mainForm = new MainForm(user,stream);
@@ -74,5 +109,6 @@ namespace DesktopApp
             this.Close();
         }
 
+        
     }
 }

@@ -135,7 +135,39 @@ namespace DesktopApp
                 return new PersonalStats();
             }
 
-            return new PersonalStats();
+          
+        }
+        static public Question GetQuestion(NetworkStream stream,string category,int type)
+        {
+            string msg = "{\"category\":\""+category+"\"}";
+            var byData = Encoding.UTF8.GetBytes(msg);
+            if(type ==0)
+            {
+                var bytes = HeaderParser.Encode(Header.QUI, Convert.ToUInt32(byData.Length));
+                stream.Write(bytes, 0, bytes.Length);
+            }
+            else if (type == 1)
+            {
+                var bytes = HeaderParser.Encode(Header.NXT, Convert.ToUInt32(byData.Length));
+                stream.Write(bytes, 0, bytes.Length);
+            } 
+            try
+            {
+                stream.Write(byData, 0, byData.Length);
+            }
+            catch (System.IO.IOException e) { }
+
+            var buffer = new byte[3];
+            int messageSize = stream.Read(buffer, 0, 3);
+            var head = HeaderParser.Decode(buffer);
+            var buffer2 = new byte[head.Item2];
+            stream.Read(buffer2, 0, buffer2.Length);
+            string receive = Encoding.UTF8.GetString(buffer2);
+            //string[] jsonified = new string[9];
+            Question question = JsonSerializer.Deserialize<Question>(receive);
+            return question;
+
+
         }
     }
 }

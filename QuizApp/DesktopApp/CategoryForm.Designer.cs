@@ -62,7 +62,6 @@ namespace DesktopApp
             this.label1.Size = new System.Drawing.Size(225, 33);
             this.label1.TabIndex = 1;
             this.label1.Text = "Wybierz Kategorię";
-          
             // 
             // catButton2
             // 
@@ -73,6 +72,7 @@ namespace DesktopApp
             this.catButton2.TabIndex = 2;
             this.catButton2.Text = "Kat2";
             this.catButton2.UseVisualStyleBackColor = true;
+            this.catButton2.Click += new System.EventHandler(this.catButton2_Click);
             // 
             // catButton3
             // 

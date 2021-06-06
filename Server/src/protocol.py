@@ -20,6 +20,7 @@ class Header(Enum):
     NXT = 10 #Question ask
     END = 11 #Quiz End
     STA = 12 #Personal Stats
+    STR = 13 #Pesonal Stats request
 
     '''
     | Version  | Type   | Payload Size |
@@ -71,7 +72,7 @@ class Protocol(object):
         login = kwargs.get('login',None)
         password = kwargs.get('password',None)
 
-        if headerType == Header.ACK or headerType == Header.ERR or headerType == Header.DIS or headerType == Header.NXT or headerType == Header.ALI :
+        if headerType == Header.ACK or headerType == Header.ERR or headerType == Header.DIS or headerType == Header.NXT or headerType == Header.ALI or headerType == Header.STR:
             data = {'msg': msg}
         elif headerType == Header.LOG:
             if login != None or password != None:
@@ -91,7 +92,7 @@ class Protocol(object):
                 raise TypeError('-SES- Missiong session id')       
         elif headerType == Header.LIS:
             quizes = kwargs.get('quizes',[])
-            if quizes != None:
+            if quizes != []:
                 data = {'quizes': quizes}
             else:
                 raise TypeError('-LIS- Missing quiz')
@@ -103,12 +104,10 @@ class Protocol(object):
                 raise TypeError('-QUI- Missing category')
         elif headerType == Header.QUE:
             question = kwargs.get('question',None)
-            a1 = kwargs.get('a1',None)
-            a2 = kwargs.get('a2',None)
-            a3 = kwargs.get('a3',None)
+            answers = kwargs.get('answers',[])
             correct = kwargs.get('correct',None)
-            if question != None and a1 != None and a2 != None and a3 != None and correct != None:
-                data = {'question':question,'a1':a1,'a2':a2,'a3':a3,'correct':correct}
+            if question != None and answers != [] and correct != None:
+                data = {'question':question,'answers':answers,'correct':correct}
             else:
                 raise TypeError('-QUE- Missing data')
         elif headerType == Header.END:
@@ -118,11 +117,11 @@ class Protocol(object):
             else:
                 raise TypeError('-END- Missing score')
         elif headerType == Header.STA:
-            stats = kwargs.get('stats', {})
-            if stats != {}:
+            stats = kwargs.get('stats', [])
+            if stats != []:
                 data = {'stats':stats}
             else:
-                raise TypeError('STA Missing stats')
+                raise TypeError('-STA- Missing stats')
 
         encodedData = json.dumps(data).encode()
         header = HeaderParser.encode(headerType,len(encodedData))

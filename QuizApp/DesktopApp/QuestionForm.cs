@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
-
+using System.Net.Sockets;
 
 namespace DesktopApp
 {
@@ -20,37 +20,40 @@ namespace DesktopApp
 
         }
         List<Question> questions = new List<Question>();
-        
-        private string username;
-        private string password;
+
+        User user;
         private string correctAnswer;
+        NetworkStream stream;
         ThreadStart timerThreadStart;
         Thread timerThread;
         int answeredQuestions, correctAnswers;
         double timer = 100.0;
+        string category = "";
         //
         public delegate void delUpdateUITextBox(string text);
-        public QuestionForm(string username, string password)
+        public QuestionForm(User user,NetworkStream stream, string category)
         {
-            this.username = username;
-            this.password = password;
+            this.user = user;
+            this.stream = stream;
+            this.category = category;
+
             InitializeComponent();
             timerThreadStart = new ThreadStart(CountDown);
-         
             timerThread = new Thread(timerThreadStart);
             timerThread.Start();
             timerThread.IsBackground = true;
+            
             answeredQuestions = correctAnswers = 0;
             GetQuestions();
             correctAnswer=LoadQuestion();
-            numberLabel.Text = answeredQuestions+1 + " out of 10";
+            numberLabel.Text = answeredQuestions+1 + " z 10";
             
         }
 
         private void resignButton_Click(object sender, EventArgs e)
         {
             timer = 0.0;
-            MainForm mainForm = new MainForm(username, password);
+            MainForm mainForm = new MainForm(user,stream);
             
             mainForm.Show();
             this.Close();
@@ -67,9 +70,11 @@ namespace DesktopApp
                     delUpdateUITextBox DelUpdateUITextBox = new delUpdateUITextBox(UpdateClock);
                     this.timeLabel.BeginInvoke(DelUpdateUITextBox, Math.Round(timer, 1).ToString());
                 }
-                catch (Exception e) { } 
+                catch (Exception e) {
+                    break;
+                } 
             }
-            EndForm endForm = new EndForm(username,password,"Time is up!\n"+ "You answered "+ correctAnswers.ToString()+ " / 10 questions correctly!", correctAnswers,0.0);
+            EndForm endForm = new EndForm(user,"Czas się skończył!\n"+ "Odpowiedziałęś na "+ correctAnswers.ToString()+ " z 10 pytań poprawnie!", correctAnswers,0.0,stream);
 
             try
             {
@@ -87,7 +92,7 @@ namespace DesktopApp
         }
         private void UpdateClock(string time)
         {
-            this.timeLabel.Text = "Time Remaining: " + time + " seconds";
+            this.timeLabel.Text = "Pozostały czas: " + time + " sekund";
         }
 
         private void aButton_Click(object sender, EventArgs e)
@@ -134,7 +139,7 @@ namespace DesktopApp
             button.Update();
             Thread.Sleep(20);
             Thread.Sleep(2000);
-            string timeLeft = timeLabel.Text.Replace("Time Remaining: ", "").Replace(" seconds","");
+            string timeLeft = timeLabel.Text.Replace("Pozostały czas: ", "").Replace(" sekund","");
             timer = Convert.ToDouble(timeLeft);
 
 
@@ -147,7 +152,7 @@ namespace DesktopApp
                  timeLeft = timeLabel.Text;
                 
                 //timerThread.Abort();
-                EndForm endForm = new EndForm(username,password,"You answered "+ correctAnswers.ToString()+ "/10 questions correctly!", correctAnswers,timer);
+                EndForm endForm = new EndForm(user,"Odpowiedziano na "+ correctAnswers.ToString()+ " z 10 pytań poprawnie!", correctAnswers,timer,stream);
                 endForm.Show();
                 this.Close();
             }
@@ -161,8 +166,9 @@ namespace DesktopApp
         }
         private void GetQuestions()
         {
+
             questions.Clear();
-            Question question = new Question("Ile mam rąk", "2", "3", "4", "5");
+            /*Question question = new Question("Ile mam rąk", "2", "3", "4", "5");
             questions.Add(question);
             question = new Question("Ile mam włosów", "Duuuużo", "3", "4", "5");
             questions.Add(question);
@@ -182,14 +188,32 @@ namespace DesktopApp
             question = new Question("Ile mam kolan", "2", "3", "4", "5");
             questions.Add(question);
             question = new Question("Dzik jest dziki, dzik jest... ", "zły", "duży", "fajny", "niefajny");
-            questions.Add(question);
+            questions.Add(question);*/
+            for(int i=0;i<10;i++)
+            {
+                if(i==0)
+                {
+                    questions.Add(QuizClient.GetQuestion(stream, category,0));
+                }
+                else
+                {             
+                    questions.Add(QuizClient.GetQuestion(stream, category, 1));
+                }
+            }
         }
+
+        private void timeLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private string LoadQuestion()
         {
-            numberLabel.Text = answeredQuestions+1 + " out of 10";
+            numberLabel.Text = answeredQuestions+1 + " z 10";
             Question question = questions[answeredQuestions];
             string[] answers = question.GetAnswers();
-            string answer = answers[0];
+            //ODPOWIEDŹ
+            string answer = question.correct;
             Random rnd = new Random();
             answers = answers.OrderBy(x => rnd.Next()).ToArray();
             questionLabel.Text = question.GetQuestion();

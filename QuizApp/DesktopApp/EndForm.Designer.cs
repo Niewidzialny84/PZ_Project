@@ -42,7 +42,7 @@ namespace DesktopApp
             this.menuButton.Name = "menuButton";
             this.menuButton.Size = new System.Drawing.Size(202, 40);
             this.menuButton.TabIndex = 0;
-            this.menuButton.Text = "Main Menu";
+            this.menuButton.Text = "Menu Główne";
             this.menuButton.UseVisualStyleBackColor = true;
             this.menuButton.Click += new System.EventHandler(this.menuButton_Click);
             // 
@@ -53,8 +53,9 @@ namespace DesktopApp
             this.messageLabel.Name = "messageLabel";
             this.messageLabel.Size = new System.Drawing.Size(500, 100);
             this.messageLabel.TabIndex = 1;
-            this.messageLabel.Text = "You Answered All Questions ";
+            this.messageLabel.Text = "Ukończono quiz";
             this.messageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.messageLabel.Click += new System.EventHandler(this.messageLabel_Click);
             // 
             // timeLeft
             // 
@@ -63,7 +64,7 @@ namespace DesktopApp
             this.timeLeft.Name = "timeLeft";
             this.timeLeft.Size = new System.Drawing.Size(500, 100);
             this.timeLeft.TabIndex = 3;
-            this.timeLeft.Text = "Time Left:";
+            this.timeLeft.Text = "Pozostały czas:";
             this.timeLeft.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // totalResult
@@ -73,7 +74,7 @@ namespace DesktopApp
             this.totalResult.Name = "totalResult";
             this.totalResult.Size = new System.Drawing.Size(500, 100);
             this.totalResult.TabIndex = 6;
-            this.totalResult.Text = "Total Result:";
+            this.totalResult.Text = "Uzyskane punkty:";
             this.totalResult.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // EndForm

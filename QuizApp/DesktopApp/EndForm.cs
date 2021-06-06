@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,31 +18,33 @@ namespace DesktopApp
         {
             InitializeComponent();
         }
-        private string username;
-        private string password;
+        private User user;
         private string message;
         private int correctQuestions;
         private double time;
-        public EndForm(string username, string password)
+        int points;
+        NetworkStream stream;
+        public EndForm(User user, NetworkStream stream)
         {
-            this.username = username;
-            this.password = password;
+            this.user = user;
             InitializeComponent();
         }
-        public EndForm(string username, string password, string message, int correctQuestions, double timeleft)
+        public EndForm(User user, string message, int correctQuestions, double timeleft, NetworkStream stream)
         {
             this.message = message;
-            this.username = username;
-            this.password = password;
+            this.user = user;
             this.correctQuestions = correctQuestions;
             this.time=timeleft;
+            this.stream = stream;
+            points = countResult(correctQuestions, Convert.ToInt32(time));
            
+
             InitializeComponent();
         }
 
         private void menuButton_Click(object sender, EventArgs e)
         {
-            MainForm mainForm = new MainForm(username, password);
+            MainForm mainForm = new MainForm(user,stream);
             this.Close() ;
             mainForm.Show();
         }
@@ -49,10 +52,18 @@ namespace DesktopApp
         private void EndForm_Load(object sender, EventArgs e)
         {
             this.messageLabel.Text = message;
-            this.timeLeft.Text = "Time left:\n" + time.ToString();
-            this.totalResult.Text = "Total result:\n" + countResult(correctQuestions,Convert.ToInt32(time)).ToString();
+            this.timeLeft.Text = "Pozostały czas:\n" + time.ToString();
+            this.totalResult.Text = "Uzyskane punkty:\n" + points.ToString();
+            if (!QuizClient.SendPoints(stream, points))
+            {
+                MessageBox.Show("Nie udało się zsynchronizować wyników z serwerem");
+            }
         }
-        int countResult(int correctAnswers,int timeLeft) => (correctAnswers* 7 + 2 * (timeLeft / 5));    
-        
+        int countResult(int correctAnswers,int timeLeft) => (correctAnswers* 7 + 2 * (timeLeft / 5));
+
+        private void messageLabel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

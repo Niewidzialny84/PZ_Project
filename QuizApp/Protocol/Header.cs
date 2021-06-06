@@ -19,8 +19,9 @@ namespace Protocol
         QUE = 0b0000_1001, 
         NXT = 0b0000_1010, 
         END = 0b0000_1011,
-        STA = 0b0000_1100, 
-   
+        STA = 0b0000_1100,
+        STR = 0b0000_1101,
+
     }
 
     public class HeaderParser

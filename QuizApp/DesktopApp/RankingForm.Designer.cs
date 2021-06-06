@@ -45,7 +45,7 @@ namespace DesktopApp
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(102, 26);
             this.backButton.TabIndex = 0;
-            this.backButton.Text = "Back";
+            this.backButton.Text = "Powrót";
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
@@ -55,37 +55,38 @@ namespace DesktopApp
             this.label1.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(333, 31);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(164, 29);
+            this.label1.Size = new System.Drawing.Size(173, 29);
             this.label1.TabIndex = 25;
-            this.label1.Text = "Global Rankings";
+            this.label1.Text = "Ranking globalny";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label14.Location = new System.Drawing.Point(514, 98);
+            this.label14.Location = new System.Drawing.Point(400, 98);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(93, 26);
+            this.label14.Size = new System.Drawing.Size(188, 26);
             this.label14.TabIndex = 26;
-            this.label14.Text = "Find user";
+            this.label14.Text = "Znajdź użytkownika";
             // 
             // findButton
             // 
             this.findButton.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.findButton.Location = new System.Drawing.Point(719, 96);
+            this.findButton.Location = new System.Drawing.Point(702, 96);
             this.findButton.Name = "findButton";
-            this.findButton.Size = new System.Drawing.Size(75, 31);
+            this.findButton.Size = new System.Drawing.Size(92, 31);
             this.findButton.TabIndex = 27;
-            this.findButton.Text = "Find";
+            this.findButton.Text = "Znajdź";
             this.findButton.UseVisualStyleBackColor = true;
+            this.findButton.Click += new System.EventHandler(this.findButton_Click);
             // 
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox1.Location = new System.Drawing.Point(613, 95);
+            this.textBox1.Location = new System.Drawing.Point(584, 95);
             this.textBox1.Name = "textBox1";
-            this.textBox1.PlaceholderText = "username";
-            this.textBox1.Size = new System.Drawing.Size(100, 34);
+            this.textBox1.PlaceholderText = "Użytkownik";
+            this.textBox1.Size = new System.Drawing.Size(112, 34);
             this.textBox1.TabIndex = 28;
             // 
             // myRankingButton
@@ -95,7 +96,7 @@ namespace DesktopApp
             this.myRankingButton.Name = "myRankingButton";
             this.myRankingButton.Size = new System.Drawing.Size(135, 35);
             this.myRankingButton.TabIndex = 29;
-            this.myRankingButton.Text = "My rankings";
+            this.myRankingButton.Text = "Moje wyniki";
             this.myRankingButton.UseVisualStyleBackColor = true;
             // 
             // dataGridView1

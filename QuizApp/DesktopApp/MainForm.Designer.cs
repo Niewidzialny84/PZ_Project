@@ -43,10 +43,11 @@ namespace DesktopApp
             this.usernameLabel.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.usernameLabel.Location = new System.Drawing.Point(265, 28);
             this.usernameLabel.Name = "usernameLabel";
-            this.usernameLabel.Size = new System.Drawing.Size(192, 29);
+            this.usernameLabel.Size = new System.Drawing.Size(198, 29);
             this.usernameLabel.TabIndex = 0;
-            this.usernameLabel.Text = "Hello Niewidzialny";
+            this.usernameLabel.Text = "Witaj Niewidzialny";
             this.usernameLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.usernameLabel.Click += new System.EventHandler(this.usernameLabel_Click);
             // 
             // logoutButton
             // 
@@ -55,7 +56,7 @@ namespace DesktopApp
             this.logoutButton.Name = "logoutButton";
             this.logoutButton.Size = new System.Drawing.Size(227, 39);
             this.logoutButton.TabIndex = 1;
-            this.logoutButton.Text = "Logout";
+            this.logoutButton.Text = "Wyloguj";
             this.logoutButton.UseVisualStyleBackColor = true;
             this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
             // 
@@ -66,7 +67,7 @@ namespace DesktopApp
             this.statsButton.Name = "statsButton";
             this.statsButton.Size = new System.Drawing.Size(227, 39);
             this.statsButton.TabIndex = 2;
-            this.statsButton.Text = "Stats";
+            this.statsButton.Text = "Statystyki";
             this.statsButton.UseVisualStyleBackColor = true;
             this.statsButton.Click += new System.EventHandler(this.statsButton_Click);
             // 
@@ -77,8 +78,9 @@ namespace DesktopApp
             this.rankingButton.Name = "rankingButton";
             this.rankingButton.Size = new System.Drawing.Size(227, 39);
             this.rankingButton.TabIndex = 3;
-            this.rankingButton.Text = "Global Rankings";
+            this.rankingButton.Text = "Ranking globalny";
             this.rankingButton.UseVisualStyleBackColor = true;
+            this.rankingButton.Visible = false;
             this.rankingButton.Click += new System.EventHandler(this.rankingButton_Click);
             // 
             // playButton
@@ -88,7 +90,7 @@ namespace DesktopApp
             this.playButton.Name = "playButton";
             this.playButton.Size = new System.Drawing.Size(227, 39);
             this.playButton.TabIndex = 5;
-            this.playButton.Text = "Play";
+            this.playButton.Text = "Graj";
             this.playButton.UseVisualStyleBackColor = true;
             this.playButton.Click += new System.EventHandler(this.playButton_Click);
             // 

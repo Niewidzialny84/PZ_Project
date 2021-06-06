@@ -36,7 +36,7 @@ namespace DesktopApp
         }
         public bool Login(string passwd, NetworkStream stream)
         {
-            //(0b0000_0011)
+     
             User user = new User(username, passwd);
             var jsonfied = JsonSerializer.Serialize(user);
             var byData = Encoding.UTF8.GetBytes(jsonfied);
@@ -73,6 +73,69 @@ namespace DesktopApp
                 stream.Write(byData, 0, byData.Length);
             }
             catch(System.IO.IOException e){}
+        }
+        static public Categories GetCategories(NetworkStream stream)
+        {      
+            string msg = "{\"msg\":\"GimmeList\"}";
+            var byData = Encoding.UTF8.GetBytes(msg);
+            var bytes = HeaderParser.Encode(Header.ALI, Convert.ToUInt32(byData.Length));
+            stream.Write(bytes, 0, bytes.Length);
+            try
+            {
+                stream.Write(byData, 0, byData.Length);
+            }
+            catch (System.IO.IOException e) { }
+
+            var buffer = new byte[3];
+            int messageSize = stream.Read(buffer, 0, 3);
+            var head = HeaderParser.Decode(buffer);
+            var buffer2 = new byte[head.Item2];
+            stream.Read(buffer2, 0, buffer2.Length);
+            string receive = Encoding.UTF8.GetString(buffer2);
+            //string[] jsonified = new string[9];
+            Categories categories = JsonSerializer.Deserialize<Categories>(receive);
+            if (head.Item1 == Header.ERR)
+            {               
+                return categories;
+            }
+            else
+            {
+
+                return categories;
+            }
+
+            
+        }
+        static public PersonalStats GetPersonalStats(NetworkStream stream)
+        {
+            string msg = "{\"msg\":\"GimmeStats\"}";
+            var byData = Encoding.UTF8.GetBytes(msg);
+            var bytes = HeaderParser.Encode(Header.STR, Convert.ToUInt32(byData.Length));
+            stream.Write(bytes, 0, bytes.Length);
+            try
+            {
+                stream.Write(byData, 0, byData.Length);
+            }
+            catch (System.IO.IOException e) { }
+
+            var buffer = new byte[3];
+            int messageSize = stream.Read(buffer, 0, 3);
+            var head = HeaderParser.Decode(buffer);
+            var buffer2 = new byte[head.Item2];
+            stream.Read(buffer2, 0, buffer2.Length);
+            string receive = Encoding.UTF8.GetString(buffer2);
+            //string[] jsonified = new string[9];
+            PersonalStats personalStats = JsonSerializer.Deserialize<PersonalStats>(receive);
+            if (head.Item1 == Header.STA)
+            {
+                return personalStats;
+            }
+            else
+            {
+                return new PersonalStats();
+            }
+
+            return new PersonalStats();
         }
     }
 }

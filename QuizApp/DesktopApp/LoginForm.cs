@@ -37,7 +37,7 @@ namespace DesktopApp
                 MainForm mainForm = new MainForm(new User(log_box.Text,pass_box.Text),stream);
                 this.Hide();
                 mainForm.Show();
-                //
+                
             }
             else
             {

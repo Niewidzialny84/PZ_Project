@@ -24,6 +24,7 @@ namespace DesktopApp
             this.user = user;
             this.stream = stream;
             InitializeComponent();
+            loadData();
         }
         private void backButton_Click(object sender, EventArgs e)
         {
@@ -31,5 +32,10 @@ namespace DesktopApp
             mainForm.Show();
             this.Close();
         }
+        private void loadData()
+        {
+            QuizClient.GetPersonalStats(stream);
+        }
+
     }
 }

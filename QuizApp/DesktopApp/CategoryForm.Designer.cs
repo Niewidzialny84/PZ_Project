@@ -62,7 +62,7 @@ namespace DesktopApp
             this.label1.Size = new System.Drawing.Size(225, 33);
             this.label1.TabIndex = 1;
             this.label1.Text = "Wybierz Kategorię";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+          
             // 
             // catButton2
             // 

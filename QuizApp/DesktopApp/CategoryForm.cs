@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Sockets;
+using Protocol;
 
 namespace DesktopApp
 {
@@ -26,12 +27,37 @@ namespace DesktopApp
             this.user = user;
             this.stream = stream;
             InitializeComponent();
+            LoadObjects();
+            getCategories();
 
         }
-        private List<Button> getCategories()
+        private void LoadObjects()
         {
-            List<Button> myCategories = new List<Button>();
-            return myCategories;
+            categories.Add(catButton1);
+            categories.Add(catButton2);
+            categories.Add(catButton3);
+            categories.Add(catButton4);
+            categories.Add(catButton5);
+            categories.Add(catButton6);
+            categories.Add(catButton7);
+            categories.Add(catButton8);
+            categories.Add(catButton9);
+        }
+        private void getCategories()
+        {
+            Categories temp = QuizClient.GetCategories(stream);
+            for(int i=0;i<9;i++)
+            {
+                if(i<temp.quizes.Count())
+                {
+                    categories[i].Text = temp.quizes[i];
+                }
+                else
+                {
+                    categories[i].Visible = false;
+                }
+            }
+
         }
         private void catButton1_Click(object sender, EventArgs e)
         {
@@ -46,11 +72,6 @@ namespace DesktopApp
             MainForm mainForm = new MainForm(user,stream);
             mainForm.Show();
             this.Close();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
     }

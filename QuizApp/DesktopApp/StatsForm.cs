@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Sockets;
+using Protocol;
 
 namespace DesktopApp
 {
@@ -34,7 +35,16 @@ namespace DesktopApp
         }
         private void loadData()
         {
-            QuizClient.GetPersonalStats(stream);
+            PersonalStats personalStats= QuizClient.GetPersonalStats(stream);
+           
+            for(int i =0; i<personalStats.stats.Length;i++)
+            {
+                
+                DataGridViewRow row = (DataGridViewRow)dataGridView1.Rows[0].Clone();
+                row.Cells[0].Value = personalStats.stats[i].category;
+                row.Cells[1].Value = personalStats.stats[i].score;
+                dataGridView1.Rows.Add(row);
+            }
         }
 
     }

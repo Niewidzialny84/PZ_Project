@@ -20,6 +20,7 @@ class Header(Enum):
     NXT = 10 #Question ask
     END = 11 #Quiz End
     STA = 12 #Personal Stats
+    STR = 13 #Pesonal Stats request
 
     '''
     | Version  | Type   | Payload Size |
@@ -71,7 +72,7 @@ class Protocol(object):
         login = kwargs.get('login',None)
         password = kwargs.get('password',None)
 
-        if headerType == Header.ACK or headerType == Header.ERR or headerType == Header.DIS or headerType == Header.NXT or headerType == Header.ALI :
+        if headerType == Header.ACK or headerType == Header.ERR or headerType == Header.DIS or headerType == Header.NXT or headerType == Header.ALI or headerType == Header.STR:
             data = {'msg': msg}
         elif headerType == Header.LOG:
             if login != None or password != None:
@@ -91,7 +92,7 @@ class Protocol(object):
                 raise TypeError('-SES- Missiong session id')       
         elif headerType == Header.LIS:
             quizes = kwargs.get('quizes',[])
-            if quizes != None:
+            if quizes != []:
                 data = {'quizes': quizes}
             else:
                 raise TypeError('-LIS- Missing quiz')
@@ -118,11 +119,11 @@ class Protocol(object):
             else:
                 raise TypeError('-END- Missing score')
         elif headerType == Header.STA:
-            stats = kwargs.get('stats', {})
-            if stats != {}:
+            stats = kwargs.get('stats', [])
+            if stats != []:
                 data = {'stats':stats}
             else:
-                raise TypeError('STA Missing stats')
+                raise TypeError('-STA- Missing stats')
 
         encodedData = json.dumps(data).encode()
         header = HeaderParser.encode(headerType,len(encodedData))

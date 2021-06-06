@@ -16,6 +16,7 @@ namespace DesktopApp
 
         private User user;
         NetworkStream stream;
+        List<Button> categories = new List<Button>();
         public CategoryForm()
         {
             InitializeComponent();
@@ -25,8 +26,13 @@ namespace DesktopApp
             this.user = user;
             this.stream = stream;
             InitializeComponent();
-        }
 
+        }
+        private List<Button> getCategories()
+        {
+            List<Button> myCategories = new List<Button>();
+            return myCategories;
+        }
         private void catButton1_Click(object sender, EventArgs e)
         {
             QuestionForm questionForm = new QuestionForm(user,stream);
@@ -46,5 +52,6 @@ namespace DesktopApp
         {
 
         }
+
     }
 }

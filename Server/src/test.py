@@ -34,6 +34,18 @@ def statsRequest():
     h, p = Protocol.encode(Header.STR,msg = 'give')
     transfer(h,p)
 
+def beginQuiz(category):
+    h, p = Protocol.encode(Header.QUI,category=category)
+    transfer(h,p)
+
+def nextQueston():
+    h, p = Protocol.encode(Header.NXT,msg='give')
+    transfer(h,p)
+
+def endQuiz(score):
+    h,p = Protocol.encode(Header.END,score=score)
+    transfer(h,p)
+
 '''
 register('Eryk','123')
 
@@ -58,13 +70,23 @@ if headerType == Header.SES:
     session = data['session']
     print(session)
 
-    statsRequest()
+    #statsRequest()
+    beginQuiz('Sport')
 
     headerType, size = HeaderParser.decode(conn.recv(3))
     data = Protocol.decode(conn.recv(size))
     print(data)
 
-    
+    for x in range(9):
+        nextQueston()
+        headerType, size = HeaderParser.decode(conn.recv(3))
+        data = Protocol.decode(conn.recv(size))
+        print(data)
+
+    endQuiz(888)
+    headerType, size = HeaderParser.decode(conn.recv(3))
+    data = Protocol.decode(conn.recv(size))
+    print(data)
 
 elif headerType == Header.ERR:
     print(data['msg'])

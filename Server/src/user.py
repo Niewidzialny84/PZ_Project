@@ -122,7 +122,7 @@ class UserLogged(User):
                         for y in cat:
                             if x['quizid'] == y['id']:
                                 print('abc')
-                                ret.append({'category:':y['category_name'], 'score': x['score']})
+                                ret.append({'category':y['category_name'], 'score': x['score']})
                                 break
                     
                     if ret != []:

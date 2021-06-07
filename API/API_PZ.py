@@ -274,7 +274,8 @@ class QuizCategory(Resource):
     
     @staticmethod
     def get():
-        return make_response(jsonify(getQuizCategoryNames()), 200)
+        quizzes = Quiz.query.all()
+        return make_response(jsonify(quizzes_schema.dump(quizzes)), 200)
 
 ####### Stats Manager ##############
 class StatsManager(Resource):

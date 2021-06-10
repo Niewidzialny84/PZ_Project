@@ -201,3 +201,85 @@ https://www.getpostman.com/collections/1d6a4248406e6ff0c984
 ```
 **Example response:** `200 OK`
 
+**[GET]** `api/stats`\
+**Description:** return list of all stats.\
+**Params:** `None:`
+**Example response:**
+```gherkin=
+200 OK
+[
+    {
+        "id": 1,
+        "userid" : 1,
+        "quizid": 2,
+        "score":1
+    },
+    {
+        "id": 1,
+        "userid" : 1,
+        "quizid": 2,
+        "score":1
+    }
+]
+```
+
+**[GET]** `api/top-stats`\
+**Description:** return list of top 10 stats in all categories.\
+**Params:** `None:`
+**Example response:**
+```gherkin=
+200 OK
+[
+    {
+        "Kolarstwo": []
+    },
+    {
+        "Sport": [
+            {
+                "score": 3,
+                "username": "multiKarlik"
+            },
+            {
+                "score": 2,
+                "username": "multiKorzych"
+            }
+        ]
+    },
+    {
+        "Historia": []
+    },
+    {
+        "Książki": []
+    },
+    {
+        "Nauka": []
+    },
+    {
+        "Motoryzacja": []
+    },
+    {
+        "Informatyka": []
+    },
+    {
+        "Wiedza o kraju": []
+    }
+]
+```
+
+**[GET]** `api/top-stats?category=<string:category_name>`\
+**Description:** return list of top 10 stats in specific category.\
+**Params:** `URI: <string:category_name>:`
+**Example response:**
+```gherkin=
+200 OK
+[
+    {
+        "score": 3,
+        "username": "multiKarlik"
+    },
+    {
+        "score": 2,
+        "username": "multiKorzych"
+    }
+]
+```

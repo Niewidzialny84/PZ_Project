@@ -203,7 +203,7 @@ https://www.getpostman.com/collections/1d6a4248406e6ff0c984
 
 **[GET]** `api/stats`\
 **Description:** return list of all stats.\
-**Params:** `None:`
+**Params:** `None:`\
 **Example response:**
 ```gherkin=
 200 OK
@@ -225,7 +225,7 @@ https://www.getpostman.com/collections/1d6a4248406e6ff0c984
 
 **[GET]** `api/top-stats`\
 **Description:** return list of top 10 stats in all categories.\
-**Params:** `None:`
+**Params:** `None:`\
 **Example response:**
 ```gherkin=
 200 OK
@@ -268,7 +268,7 @@ https://www.getpostman.com/collections/1d6a4248406e6ff0c984
 
 **[GET]** `api/top-stats?category=<string:category_name>`\
 **Description:** return list of top 10 stats in specific category.\
-**Params:** `URI: <string:category_name>:`
+**Params:** `URI: <string:category_name>:`\
 **Example response:**
 ```gherkin=
 200 OK

@@ -72,7 +72,7 @@ class Protocol(object):
         login = kwargs.get('login',None)
         password = kwargs.get('password',None)
 
-        if headerType == Header.ACK or headerType == Header.ERR or headerType == Header.DIS or headerType == Header.NXT or headerType == Header.ALI or headerType == Header.STR:
+        if headerType == Header.ACK or headerType == Header.ERR or headerType == Header.DIS or headerType == Header.NXT or headerType == Header.ALI:
             data = {'msg': msg}
         elif headerType == Header.LOG:
             if login != None or password != None:
@@ -122,6 +122,9 @@ class Protocol(object):
                 data = {'stats':stats}
             else:
                 raise TypeError('-STA- Missing stats')
+        elif headerType == Header.STR:
+            category = kwargs.get('category',None)
+            data = {'msg': msg, 'category': category}
 
         encodedData = json.dumps(data).encode()
         header = HeaderParser.encode(headerType,len(encodedData))

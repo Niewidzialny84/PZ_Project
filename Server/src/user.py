@@ -133,13 +133,13 @@ class UserLogged(User):
                     else:
                         Logger.log('Stats request failed'+str(self.dbID))
                 else:
-                    r = requests.get(URL.local+'top-stats',params={'category_name':data['category']})
+                    r = requests.get(URL.local+'top-stats',params={'category':data['category']})
 
                     if r.status_code == 200:
                         stat = r.json()
 
                         if stat != []:
-                           h,p = Protocol.encode(Header.STA, stats=ret)
+                           h,p = Protocol.encode(Header.STA, stats=stat)
                         else:
                            h,p = Protocol.encode(Header.ERR,msg='empty')
                         Logger.log('Stats request '+str(self.dbID))

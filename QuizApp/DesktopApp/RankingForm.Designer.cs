@@ -31,11 +31,11 @@ namespace DesktopApp
         {
             this.backButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.findButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.myRankingButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.Użytkownik = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Wynik = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,71 +53,63 @@ namespace DesktopApp
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(333, 31);
+            this.label1.Location = new System.Drawing.Point(327, 51);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(173, 29);
             this.label1.TabIndex = 25;
             this.label1.Text = "Ranking globalny";
             // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label14.Location = new System.Drawing.Point(400, 98);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(188, 26);
-            this.label14.TabIndex = 26;
-            this.label14.Text = "Znajdź użytkownika";
-            // 
-            // findButton
-            // 
-            this.findButton.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.findButton.Location = new System.Drawing.Point(702, 96);
-            this.findButton.Name = "findButton";
-            this.findButton.Size = new System.Drawing.Size(92, 31);
-            this.findButton.TabIndex = 27;
-            this.findButton.Text = "Znajdź";
-            this.findButton.UseVisualStyleBackColor = true;
-            this.findButton.Click += new System.EventHandler(this.findButton_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox1.Location = new System.Drawing.Point(584, 95);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.PlaceholderText = "Użytkownik";
-            this.textBox1.Size = new System.Drawing.Size(112, 34);
-            this.textBox1.TabIndex = 28;
-            // 
-            // myRankingButton
-            // 
-            this.myRankingButton.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.myRankingButton.Location = new System.Drawing.Point(30, 106);
-            this.myRankingButton.Name = "myRankingButton";
-            this.myRankingButton.Size = new System.Drawing.Size(135, 35);
-            this.myRankingButton.TabIndex = 29;
-            this.myRankingButton.Text = "Moje wyniki";
-            this.myRankingButton.UseVisualStyleBackColor = true;
-            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 147);
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Użytkownik,
+            this.Wynik});
+            this.dataGridView1.Location = new System.Drawing.Point(5, 147);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(782, 259);
+            this.dataGridView1.Size = new System.Drawing.Size(789, 259);
             this.dataGridView1.TabIndex = 30;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(673, 118);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 23);
+            this.comboBox1.TabIndex = 31;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(591, 118);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(76, 20);
+            this.label2.TabIndex = 32;
+            this.label2.Text = "Kategoria";
+            // 
+            // Użytkownik
+            // 
+            this.Użytkownik.HeaderText = "Użytkownik";
+            this.Użytkownik.Name = "Użytkownik";
+            this.Użytkownik.Width = 345;
+            // 
+            // Wynik
+            // 
+            this.Wynik.HeaderText = "Wynik";
+            this.Wynik.Name = "Wynik";
+            this.Wynik.Width = 400;
             // 
             // RankingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.myRankingButton);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.findButton);
-            this.Controls.Add(this.label14);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.backButton);
             this.Name = "RankingForm";
@@ -132,10 +124,10 @@ namespace DesktopApp
 
         private System.Windows.Forms.Button backButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Button findButton;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button myRankingButton;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Użytkownik;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Wynik;
     }
 }

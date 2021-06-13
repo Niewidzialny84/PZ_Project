@@ -83,6 +83,7 @@ namespace DesktopApp
             this.catButton3.TabIndex = 3;
             this.catButton3.Text = "Kat3";
             this.catButton3.UseVisualStyleBackColor = true;
+            this.catButton3.Click += new System.EventHandler(this.catButton3_Click);
             // 
             // catButton6
             // 
@@ -93,6 +94,7 @@ namespace DesktopApp
             this.catButton6.TabIndex = 6;
             this.catButton6.Text = "Kat6";
             this.catButton6.UseVisualStyleBackColor = true;
+            this.catButton6.Click += new System.EventHandler(this.catButton6_Click);
             // 
             // catButton5
             // 
@@ -103,6 +105,7 @@ namespace DesktopApp
             this.catButton5.TabIndex = 5;
             this.catButton5.Text = "Kat5";
             this.catButton5.UseVisualStyleBackColor = true;
+            this.catButton5.Click += new System.EventHandler(this.catButton5_Click);
             // 
             // catButton4
             // 
@@ -113,6 +116,7 @@ namespace DesktopApp
             this.catButton4.TabIndex = 4;
             this.catButton4.Text = "Kat4";
             this.catButton4.UseVisualStyleBackColor = true;
+            this.catButton4.Click += new System.EventHandler(this.catButton4_Click);
             // 
             // catButton9
             // 
@@ -123,6 +127,7 @@ namespace DesktopApp
             this.catButton9.TabIndex = 9;
             this.catButton9.Text = "Kat9";
             this.catButton9.UseVisualStyleBackColor = true;
+            this.catButton9.Click += new System.EventHandler(this.catButton9_Click);
             // 
             // catButton8
             // 
@@ -133,6 +138,7 @@ namespace DesktopApp
             this.catButton8.TabIndex = 8;
             this.catButton8.Text = "Kat8";
             this.catButton8.UseVisualStyleBackColor = true;
+            this.catButton8.Click += new System.EventHandler(this.catButton8_Click);
             // 
             // catButton7
             // 
@@ -143,6 +149,7 @@ namespace DesktopApp
             this.catButton7.TabIndex = 7;
             this.catButton7.Text = "Kat7";
             this.catButton7.UseVisualStyleBackColor = true;
+            this.catButton7.Click += new System.EventHandler(this.catButton7_Click);
             // 
             // backButton
             // 

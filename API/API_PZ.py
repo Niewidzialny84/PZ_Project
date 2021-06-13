@@ -292,7 +292,7 @@ class StatsManager(Resource):
             stats = Stats.query.all()
             return make_response(jsonify(users_schema.dump(stats)), 200)
         
-        return make_response(jsonify({'Message': 'BAD REQUEST'}), 400)
+ #       return make_response(jsonify({'Message': 'BAD REQUEST'}), 400)
                   
     @staticmethod
     def patch():
@@ -318,6 +318,16 @@ class StatsManager(Resource):
             return make_response(jsonify({ 'Message': 'OK' }), 200)
         else:
             return make_response(jsonify({'Message': 'BAD REQUEST'}), 400)
+
+    @app.route('/api/top-stats', methods=['GET'])
+    def getTopStats():
+        try: category = request.args['category']  
+        except Exception as _: category = None
+
+        if category != None:
+            return make_response(jsonify(getCategoryTopTen(category)), 200)
+        else:
+            return make_response(jsonify(getAllTopTen()), 200)
 
 ####### Functions ##############
 
@@ -346,6 +356,39 @@ def getQuizCategoryNames():
         return [quiz.category_name for quiz in quizzes]
     else:
         return "[]"
+
+def getCategoryTopTen(category):
+    quizz = Quiz.query.filter_by(category_name = category).first()
+    listOfTopTen = []
+    
+    tmpArr = Stats.query.filter_by(quizid = quizz.id).all()
+    tmpArr.sort(key=lambda x: x.score, reverse=True)
+    for s in tmpArr[:10]:
+        tmpDictResult = {}
+        user = User.query.filter_by(id = s.userid).first()
+        tmpDictResult['score'] = s.score
+        tmpDictResult['username'] = user.username
+        listOfTopTen.append(tmpDictResult)
+            
+    return listOfTopTen
+
+def getAllTopTen():
+    quizzes = Quiz.query.all()
+    listOfTopTen = []
+    
+    for q in quizzes:
+        arrOfStats = []
+        tmpArr = Stats.query.filter_by(quizid = q.id).all()
+        tmpArr.sort(key=lambda x: x.score, reverse=True)
+        for s in tmpArr[:10]:
+            tmpDictResult = {}
+            user = User.query.filter_by(id = s.userid).first()
+            tmpDictResult['score'] = s.score
+            tmpDictResult['username'] = user.username
+            arrOfStats.append(tmpDictResult)
+        listOfTopTen.append({q.category_name : arrOfStats})
+            
+    return listOfTopTen
 
 ####### Resource Mapping ##############
 

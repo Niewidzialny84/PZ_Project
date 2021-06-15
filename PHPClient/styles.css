@@ -1,0 +1,18 @@
+input[type=submit] {
+  width: 100px;
+  height: 30px;
+  border: none;
+  background-color: darkgray;
+}
+
+input[type=submit]:hover {
+  width: 100px;
+  height: 30px;
+  border: none;
+  background-color: grey;
+  cursor: pointer;
+}
+
+.question{
+  width: 300px;
+}

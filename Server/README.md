@@ -8,7 +8,7 @@ All requirements files are places inside `requirements.txt` file in root folder.
 To run the application API must be up and running. To get access from clients the server application must be run. 
 
 ### TCP Server
-`python Server/src/server.py`
+`python src/server.py`
 
 Running on all interfaces and port 7777. 
 

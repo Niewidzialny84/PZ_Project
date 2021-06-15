@@ -109,29 +109,44 @@ class UserLogged(User):
                     h,p = Protocol.encode(Header.ERR, msg='Cant get categories')
                     Logger.log('Category request failed')
             elif headerType == Header.STR:
-                r = requests.get(URL.local+'quizzes-categories')
-                r2 = requests.get(URL.local+'stats', params={'userid':self.dbID})
+                if data['category'] == []:
+                    r = requests.get(URL.local+'quizzes-categories')
+                    r2 = requests.get(URL.local+'stats', params={'userid':self.dbID})
 
-                if r.status_code == 200 and r2.status_code == 200:
-                    cat = r.json()
-                    stat = r2.json()
+                    if r.status_code == 200 and r2.status_code == 200:
+                        cat = r.json()
+                        stat = r2.json()
 
-                    print(stat)
-                    ret = []
-                    for x in stat:
-                        for y in cat:
-                            if x['quizid'] == y['id']:
-                                print('abc')
-                                ret.append({'category':y['category_name'], 'score': x['score']})
-                                break
-                    
-                    if ret != []:
-                        h,p = Protocol.encode(Header.STA, stats=ret)
+                        ret = []
+                        for x in stat:
+                            for y in cat:
+                                if x['quizid'] == y['id']:
+                                    print('abc')
+                                    ret.append({'category':y['category_name'], 'score': x['score']})
+                                    break
+                        
+                        if ret != []:
+                            h,p = Protocol.encode(Header.STA, stats=ret)
+                        else:
+                            h,p = Protocol.encode(Header.ERR,msg='empty')
+                        Logger.log('Stats request '+str(self.dbID))
                     else:
-                        h,p = Protocol.encode(Header.ERR,msg='empty')
-                    Logger.log('Stats request '+str(self.dbID))
+                        Logger.log('Stats request failed'+str(self.dbID))
                 else:
-                    Logger.log('Stats request failed'+str(self.dbID))
+                    r = requests.get(URL.local+'top-stats',params={'category':data['category']})
+
+                    if r.status_code == 200:
+                        stat = r.json()
+
+                        if stat != []:
+                           h,p = Protocol.encode(Header.STA, stats=stat)
+                        else:
+                           h,p = Protocol.encode(Header.ERR,msg='empty')
+                        Logger.log('Stats request '+str(self.dbID))
+                    else:
+                        Logger.log('Stats request failed'+str(self.dbID))
+
+
             elif headerType == Header.QUI:
                 r = requests.get(URL.local+'quizzes', params={'category_name':data['category']})
                 
@@ -162,10 +177,10 @@ class UserLogged(User):
                 if self.quiz != None:
                     question = self.quiz.next()
                     h,p = Protocol.encode(Header.QUE, question=question.question,answers=question.answers,correct=question.correct)
-                    Logger.log('Quiz request fail '+str(self.dbID))
+                    Logger.log('next question '+str(self.dbID))
                 else:
                     h,p = Protocol.encode(Header.ERR, msg='Invalid request')
-                    Logger.log('Quiz request fail '+str(self.dbID))
+                    Logger.log('next question fail '+str(self.dbID))
             elif headerType == Header.END:
                 if self.quiz != None:
                     r = requests.patch(URL.local+'stats', json={'userid':self.dbID,'quizid':self.quiz.quizid,'score':data['score']})

@@ -62,6 +62,34 @@ namespace DesktopApp
                 return false;
             }
         }
+        static public bool Register(string usr,string passwd, NetworkStream stream)
+        {
+
+            User user = new User(usr, passwd);
+            var jsonfied = JsonSerializer.Serialize(user);
+            var byData = Encoding.UTF8.GetBytes(jsonfied);
+
+            var bytes = HeaderParser.Encode(Header.REG, Convert.ToUInt32(byData.Length));
+
+            stream.Write(bytes, 0, bytes.Length);
+            stream.Write(byData, 0, byData.Length);
+
+            var buffer = new byte[3];
+            int messageSize = stream.Read(buffer, 0, 3);
+            var head = HeaderParser.Decode(buffer);
+            var buffer2 = new byte[head.Item2];
+            stream.Read(buffer2, 0, buffer2.Length);
+            string receive = Encoding.ASCII.GetString(buffer2);
+
+            if (head.Item1 == Header.ACK)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         static public void Disconnect(NetworkStream stream)
         {
             string msg = "{\"msg\":\"Disconnect\"}";
@@ -108,7 +136,7 @@ namespace DesktopApp
         }
         static public PersonalStats GetPersonalStats(NetworkStream stream)
         {
-            string msg = "{\"msg\":\"GimmeStats\"}";
+            string msg = "{\"msg\":\"GimmeStats\",\"category\":[]}";
             var byData = Encoding.UTF8.GetBytes(msg);
             var bytes = HeaderParser.Encode(Header.STR, Convert.ToUInt32(byData.Length));
             stream.Write(bytes, 0, bytes.Length);
@@ -136,6 +164,37 @@ namespace DesktopApp
             }
 
           
+        }
+        static public GlobalStats GetRanking(NetworkStream stream,string category)
+        {
+            string msg = "{\"msg\":\"GimmeStats\",\"category\":\""+category+"\"}";
+            var byData = Encoding.UTF8.GetBytes(msg);
+            var bytes = HeaderParser.Encode(Header.STR, Convert.ToUInt32(byData.Length));
+            stream.Write(bytes, 0, bytes.Length);
+            try
+            {
+                stream.Write(byData, 0, byData.Length);
+            }
+            catch (System.IO.IOException e) { }
+
+            var buffer = new byte[3];
+            int messageSize = stream.Read(buffer, 0, 3);
+            var head = HeaderParser.Decode(buffer);
+            var buffer2 = new byte[head.Item2];
+            stream.Read(buffer2, 0, buffer2.Length);
+            string receive = Encoding.UTF8.GetString(buffer2);
+            //string[] jsonified = new string[9];
+            GlobalStats globalStats = JsonSerializer.Deserialize<GlobalStats>(receive);
+            if (head.Item1 == Header.STA)
+            {
+                return globalStats;
+            }
+            else
+            {
+                return new GlobalStats();
+            }
+
+
         }
         static public Question GetQuestion(NetworkStream stream,string category,int type)
         {

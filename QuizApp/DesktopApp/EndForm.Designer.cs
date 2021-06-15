@@ -38,7 +38,7 @@ namespace DesktopApp
             // menuButton
             // 
             this.menuButton.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.menuButton.Location = new System.Drawing.Point(306, 398);
+            this.menuButton.Location = new System.Drawing.Point(263, 389);
             this.menuButton.Name = "menuButton";
             this.menuButton.Size = new System.Drawing.Size(202, 40);
             this.menuButton.TabIndex = 0;
@@ -49,7 +49,7 @@ namespace DesktopApp
             // messageLabel
             // 
             this.messageLabel.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.messageLabel.Location = new System.Drawing.Point(162, 9);
+            this.messageLabel.Location = new System.Drawing.Point(119, 0);
             this.messageLabel.Name = "messageLabel";
             this.messageLabel.Size = new System.Drawing.Size(500, 100);
             this.messageLabel.TabIndex = 1;
@@ -60,7 +60,7 @@ namespace DesktopApp
             // timeLeft
             // 
             this.timeLeft.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.timeLeft.Location = new System.Drawing.Point(162, 139);
+            this.timeLeft.Location = new System.Drawing.Point(119, 130);
             this.timeLeft.Name = "timeLeft";
             this.timeLeft.Size = new System.Drawing.Size(500, 100);
             this.timeLeft.TabIndex = 3;
@@ -70,7 +70,7 @@ namespace DesktopApp
             // totalResult
             // 
             this.totalResult.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.totalResult.Location = new System.Drawing.Point(162, 239);
+            this.totalResult.Location = new System.Drawing.Point(119, 230);
             this.totalResult.Name = "totalResult";
             this.totalResult.Size = new System.Drawing.Size(500, 100);
             this.totalResult.TabIndex = 6;
@@ -81,7 +81,7 @@ namespace DesktopApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(704, 441);
             this.Controls.Add(this.totalResult);
             this.Controls.Add(this.timeLeft);
             this.Controls.Add(this.messageLabel);

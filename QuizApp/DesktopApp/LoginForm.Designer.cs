@@ -34,6 +34,7 @@ namespace DesktopApp
             this.log_box = new System.Windows.Forms.TextBox();
             this.pass_box = new System.Windows.Forms.TextBox();
             this.loginButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // name_lbl
@@ -59,7 +60,6 @@ namespace DesktopApp
             this.top_lbl.Size = new System.Drawing.Size(247, 33);
             this.top_lbl.TabIndex = 1;
             this.top_lbl.Text = "Wyzwanie dla umysłu";
-          
             // 
             // log_box
             // 
@@ -98,12 +98,25 @@ namespace DesktopApp
             this.loginButton.UseVisualStyleBackColor = false;
             this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.ForeColor = System.Drawing.Color.Blue;
+            this.label1.Location = new System.Drawing.Point(311, 256);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(79, 15);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Zarejestruj się";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(150)))), ((int)(((byte)(125)))));
             this.ClientSize = new System.Drawing.Size(704, 441);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.pass_box);
             this.Controls.Add(this.log_box);
@@ -124,6 +137,7 @@ namespace DesktopApp
         private System.Windows.Forms.TextBox log_box;
         private System.Windows.Forms.TextBox pass_box;
         private System.Windows.Forms.Button loginButton;
+        private System.Windows.Forms.Label label1;
     }
 }
 

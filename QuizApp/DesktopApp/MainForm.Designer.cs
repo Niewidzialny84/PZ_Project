@@ -80,7 +80,6 @@ namespace DesktopApp
             this.rankingButton.TabIndex = 3;
             this.rankingButton.Text = "Ranking globalny";
             this.rankingButton.UseVisualStyleBackColor = true;
-            this.rankingButton.Visible = false;
             this.rankingButton.Click += new System.EventHandler(this.rankingButton_Click);
             // 
             // playButton

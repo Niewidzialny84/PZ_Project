@@ -126,12 +126,12 @@ Bytes inside are encoded json documents which after decoding can contain specifi
         <td>STA</td>
         <td><code>stats: list of dicts</code></td>
         <td></td>
-        <td>List of personal stats in pairs e.g<code>{"category": str, "score": int}</code></td>
+        <td>List of personal stats in pairs e.g<code>{"category": str, "score": int}</code>, Global stats comes in similar list of pairs with change where category is replaced with username</td>
     </tr>
     <tr>
         <td>STR</td>
-        <td><code>msg: str</code></td>
+        <td><code>msg: str</code><code>category: str</code></td>
         <td></td>
-        <td>Request for personal stats</td>
+        <td>Request for personal stats if category is an empty list [], request for global top 10 when category is set</td>
     </tr>
 </table>
